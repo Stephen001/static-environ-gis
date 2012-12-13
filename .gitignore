@@ -1,0 +1,16 @@
+.metadata
+.DS_Store
+*.html
+.nb-configuration.xml
+nbactions.xml
+ejbModule/
+.classpath
+target/
+.project
+.settings/
+build/
+dist/
+bin/
+*.rar
+*.zip
+*.java~
