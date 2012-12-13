@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.port7.component</groupId>
@@ -14,15 +15,15 @@
 		<artifactId>base</artifactId>
 		<version>1.2.5</version>
 	</parent>
-	
-	<modules>
-	    <module>static-environ-gis-model</module>
-	</modules>
 
+	<modules>
+		<module>static-environ-gis-model</module>
+	</modules>
+	
 	<scm>
 		<connection>scm:git:git://git.assembla.com:vessel-db.static-environ-gis.git</connection>
 		<developerConnection>scm:git:git@git.assembla.com:vessel-db.static-environ-gis.git</developerConnection>
 		<url>https://www.assembla.com/code/vessel-db/git-2/nodes</url>
-	  	<tag>HEAD</tag>
-  	</scm>
+		<tag>HEAD</tag>
+	</scm>
 </project>
