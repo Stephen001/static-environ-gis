@@ -3,10 +3,10 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<artifactId>static-environ-gis-persistence</artifactId>
+	<artifactId>static-environ-gis-api</artifactId>
 	<packaging>ejb</packaging>
 
-	<name>Static Environment GIS :: Persistence</name>
+	<name>Static Environment GIS :: API</name>
 
 	<parent>
 		<groupId>com.port7.component</groupId>
@@ -18,13 +18,10 @@
 	    <!-- Our Modules -->
 	    <dependency>
 	        <groupId>com.port7.component</groupId>
-	        <artifactId>static-environ-gis-model</artifactId>
+	        <artifactId>static-environ-gis-persistence</artifactId>
+	        <type>ejb-client</type>
 	    </dependency>
 	    
-	    <dependency>
-            <groupId>org.hibernatespatial</groupId>
-            <artifactId>hibernate-spatial</artifactId>
-       	</dependency>
        	<dependency>
 			<groupId>javax</groupId>
 			<artifactId>javaee-api</artifactId>
@@ -56,15 +53,6 @@
 						</configuration>
 					</execution>
 				</executions>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-ejb-plugin</artifactId>
-				<configuration>
-					<clientIncludes combine.children="append">
-						<clientInclude>com/port7/environment/persistence/*JPA.class</clientInclude>
-					</clientIncludes>
-				</configuration>
 			</plugin>
 		</plugins>
 	</build>

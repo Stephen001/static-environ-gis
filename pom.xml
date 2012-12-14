@@ -19,6 +19,8 @@
 	<modules>
 		<module>static-environ-gis-model</module>
 		<module>static-environ-gis-persistence</module>
+		<module>static-environ-gis-api</module>
+		<module>static-environ-gis-ear</module>
 	</modules>
 	
 	<dependencyManagement>
@@ -31,6 +33,24 @@
 	        <dependency>
 	            <groupId>com.port7.component</groupId>
 	            <artifactId>static-environ-gis-persistence</artifactId>
+	            <version>1.0.0-SNAPSHOT</version>
+	            <type>ejb</type>
+	        </dependency>
+	        <dependency>
+	            <groupId>com.port7.component</groupId>
+	            <artifactId>static-environ-gis-persistence</artifactId>
+	            <version>1.0.0-SNAPSHOT</version>
+	            <type>ejb-client</type>
+	        </dependency>
+	        <dependency>
+	            <groupId>com.port7.component</groupId>
+	            <artifactId>static-environ-gis-api</artifactId>
+	            <version>1.0.0-SNAPSHOT</version>
+	            <type>ejb</type>
+	        </dependency>
+	        <dependency>
+	            <groupId>com.port7.component</groupId>
+	            <artifactId>static-environ-gis-api</artifactId>
 	            <version>1.0.0-SNAPSHOT</version>
 	            <type>ejb-client</type>
 	        </dependency>

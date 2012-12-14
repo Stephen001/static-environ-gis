@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<artifactId>static-environ-gis-ear</artifactId>
+	<packaging>ear</packaging>
+
+	<name>Static Environment GIS :: EAR</name>
+
+	<parent>
+		<groupId>com.port7.component</groupId>
+		<artifactId>static-environ-gis</artifactId>
+		<version>1.0.0-SNAPSHOT</version>
+	</parent>
+
+	<dependencies>
+		<!-- Our Modules -->
+		<dependency>
+			<groupId>com.port7.component</groupId>
+			<artifactId>static-environ-gis-persistence</artifactId>
+			<type>ejb</type>
+		</dependency>
+		<dependency>
+			<groupId>com.port7.component</groupId>
+			<artifactId>static-environ-gis-api</artifactId>
+			<type>ejb</type>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-ear-plugin</artifactId>
+				<configuration>
+					<applicationName>static-environ-gis</applicationName>
+					<modules>
+						<ejbModule>
+							<groupId>com.port7.component</groupId>
+							<artifactId>static-environ-gis-persistence</artifactId>
+						</ejbModule>
+						<ejbModule>
+							<groupId>com.port7.component</groupId>
+							<artifactId>static-environ-gis-api</artifactId>
+						</ejbModule>
+					</modules>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>
