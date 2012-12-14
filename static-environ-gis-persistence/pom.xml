@@ -3,10 +3,10 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<artifactId>static-environ-gis-model</artifactId>
-	<packaging>jar</packaging>
+	<artifactId>static-environ-gis-persistence</artifactId>
+	<packaging>ejb</packaging>
 
-	<name>Static Environment GIS :: API Model</name>
+	<name>Static Environment GIS :: Persistence</name>
 
 	<parent>
 		<groupId>com.port7.component</groupId>
@@ -15,9 +15,19 @@
 	</parent>
 	
 	<dependencies>
+	    <!-- Our Modules -->
+	    <dependency>
+	        <groupId>com.port7.component</groupId>
+	        <artifactId>static-environ-gis-model</artifactId>
+	    </dependency>
+	    
 	    <dependency>
             <groupId>org.hibernatespatial</groupId>
             <artifactId>hibernate-spatial</artifactId>
        	</dependency>
+       	<dependency>
+			<groupId>javax</groupId>
+			<artifactId>javaee-api</artifactId>
+		</dependency>
 	</dependencies>
 </project>

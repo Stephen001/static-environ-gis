@@ -10,6 +10,8 @@ package com.port7.environment.model;
 
 import java.io.Serializable;
 
+import com.vividsolutions.jts.geom.Polygon;
+
 /**
  * A geographical representation of a country on the globe. All names and codes within this interface comply with ISO 3166.
  * 
@@ -17,7 +19,7 @@ import java.io.Serializable;
  */
 public interface Country extends Serializable {
 	/**
-	 * Returns the English country name for this country, as defined by ISO 3166-1.
+	 * Returns the English country name for this country, as defined by ISO 3166-1. This will be unique to each country instance.
 	 * 
 	 * @return The English country name for this country.
 	 */
@@ -36,4 +38,11 @@ public interface Country extends Serializable {
 	 * @return The three character country code for this country.
 	 */
 	public String getThreeCharCountryCode();
+	
+	/**
+	 * Gets the polygon that represents this Country's land mass.
+	 * 
+	 * @return The polygon representing this Country's land mass.
+	 */
+	public Polygon getLandMassShape();
 }

@@ -18,7 +18,24 @@
 
 	<modules>
 		<module>static-environ-gis-model</module>
+		<module>static-environ-gis-persistence</module>
 	</modules>
+	
+	<dependencyManagement>
+	    <dependencies>
+	        <dependency>
+	            <groupId>com.port7.component</groupId>
+	            <artifactId>static-environ-gis-model</artifactId>
+	            <version>1.0.0-SNAPSHOT</version>
+	        </dependency>
+	        <dependency>
+	            <groupId>com.port7.component</groupId>
+	            <artifactId>static-environ-gis-persistence</artifactId>
+	            <version>1.0.0-SNAPSHOT</version>
+	            <type>ejb-client</type>
+	        </dependency>
+	    </dependencies>
+	</dependencyManagement>
 	
 	<scm>
 		<connection>scm:git:git://git.assembla.com:vessel-db.static-environ-gis.git</connection>
