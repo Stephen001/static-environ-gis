@@ -44,15 +44,13 @@ public class CountryMapper implements CountryMapperLocal {
 	 */
 	@Override
 	public CountryJPA mapFromDTO(Country country) {
-		TypedQuery<CountryJPA> query = manager.createNamedQuery("country-by-name", CountryJPA.class);
-		query.setParameter("englishName", country.getEnglishName().toUpperCase(Locale.ENGLISH));
-		return query.getSingleResult();
+		return getByName(country.getEnglishName());
 	}
 
 	@Override
 	public CountryJPA getByName(String englishName) {
-		TypedQuery<CountryJPA> query = manager.createNamedQuery("country-by-name", CountryJPA.class);
-		query.setParameter("englishName", englishName.toUpperCase(Locale.ENGLISH));
+		TypedQuery<CountryJPA> query = manager.createNamedQuery("country-by-alias", CountryJPA.class);
+		query.setParameter("name", englishName.toUpperCase(Locale.ENGLISH));
 		return query.getSingleResult();
 	}
 }

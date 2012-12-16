@@ -7,6 +7,9 @@
 		<jta-data-source>jdbc/static-environ-gis</jta-data-source>
 		
 		<class>com.port7.environment.persistence.CountryJPA</class>
+		<class>com.port7.environment.persistence.CountryAliasJPA</class>
+		<class>com.port7.environment.persistence.PortJPA</class>
+		<class>com.port7.environment.persistence.PortAliasJPA</class>
 		
 		<exclude-unlisted-classes>true</exclude-unlisted-classes>
 		

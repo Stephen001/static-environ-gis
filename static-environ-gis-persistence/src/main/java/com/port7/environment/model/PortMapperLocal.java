@@ -31,10 +31,10 @@ public interface PortMapperLocal {
 	/**
 	 * Maps from DTO.
 	 * 
-	 * @param Port The DTO.
+	 * @param port The DTO.
 	 * @return The JPA entity.
 	 */
-	public PortJPA mapFromDTO(final Port Port);
+	public PortJPA mapFromDTO(final Port port);
 	
 	/**
 	 * Gets a Port by it's name.

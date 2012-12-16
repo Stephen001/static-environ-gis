@@ -41,16 +41,14 @@ public class PortMapper implements PortMapperLocal {
 	 * @see com.port7.environment.model.PortMapperLocal#mapFromDTO(com.port7.environment.model.Port)
 	 */
 	@Override
-	public PortJPA mapFromDTO(Port Port) {
-		TypedQuery<PortJPA> query = manager.createNamedQuery("port-by-name", PortJPA.class);
-		query.setParameter("englishName", Port.getEnglishName().toUpperCase(Locale.ENGLISH));
-		return query.getSingleResult();
+	public PortJPA mapFromDTO(Port port) {
+		return getByName(port.getEnglishName());
 	}
 
 	@Override
 	public PortJPA getByName(String englishName) {
-		TypedQuery<PortJPA> query = manager.createNamedQuery("port-by-name", PortJPA.class);
-		query.setParameter("englishName", englishName.toUpperCase(Locale.ENGLISH));
+		TypedQuery<PortJPA> query = manager.createNamedQuery("port-by-alias", PortJPA.class);
+		query.setParameter("name", englishName.toUpperCase(Locale.ENGLISH));
 		return query.getSingleResult();
 	}
 }
