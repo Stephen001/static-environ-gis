@@ -8,6 +8,8 @@
  */
 package com.port7.environment.model;
 
+import java.util.Locale;
+
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -43,14 +45,14 @@ public class CountryMapper implements CountryMapperLocal {
 	@Override
 	public CountryJPA mapFromDTO(Country country) {
 		TypedQuery<CountryJPA> query = manager.createNamedQuery("country-by-name", CountryJPA.class);
-		query.setParameter("englishName", country.getEnglishName());
+		query.setParameter("englishName", country.getEnglishName().toUpperCase(Locale.ENGLISH));
 		return query.getSingleResult();
 	}
 
 	@Override
 	public CountryJPA getByName(String englishName) {
 		TypedQuery<CountryJPA> query = manager.createNamedQuery("country-by-name", CountryJPA.class);
-		query.setParameter("englishName", query);
+		query.setParameter("englishName", englishName.toUpperCase(Locale.ENGLISH));
 		return query.getSingleResult();
 	}
 }
