@@ -18,7 +18,7 @@ import javax.persistence.MappedSuperclass;
  * @author Stephen Badger [stephen@port7.dk]
  */
 @MappedSuperclass
-public abstract class AbstractEntity {
+public abstract class AbstractEntityJPA {
 	@Id
 	@GeneratedValue
 	private long id;

@@ -8,6 +8,8 @@
  */
 package com.port7.environment.api;
 
+import java.util.List;
+
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
@@ -18,7 +20,7 @@ import com.port7.environment.persistence.CountryJPA;
 import com.port7.environment.persistence.PortJPA;
 
 /**
- * A service for getting {@link Country}s manipulating them.
+ * A service for getting {@link Country}s and manipulating them.
  * 
  * @author Stephen Badger [stephen@port7.dk]
  */
@@ -45,5 +47,13 @@ public class CountryService implements CountryServiceRemote {
 		CountryJPA country = countryMapper.getByName(countryName);
 		PortJPA port = portMapper.getByName(portName);
 		return port.getLocation().within(country.getLandMassShape());
+	}
+
+	/* (non-Javadoc)
+	 * @see com.port7.environment.api.CountryServiceRemote#getCountryNamesAndAliases()
+	 */
+	@Override
+	public List<String> getCountryNamesAndAliases() {
+		return countryMapper.getNamesAndAliases();
 	}
 }

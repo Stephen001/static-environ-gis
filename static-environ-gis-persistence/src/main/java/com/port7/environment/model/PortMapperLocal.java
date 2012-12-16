@@ -8,6 +8,8 @@
  */
 package com.port7.environment.model;
 
+import java.util.List;
+
 import javax.ejb.Local;
 
 import com.port7.environment.persistence.PortJPA;
@@ -43,4 +45,11 @@ public interface PortMapperLocal {
 	 * @return The entity.
 	 */
 	public PortJPA getByName(final String englishName);
+	
+	/**
+	 * Gets all port names and aliases.
+	 * 
+	 * @return All port names and aliases.
+	 */
+	public List<String> getNamesAndAliases();
 }

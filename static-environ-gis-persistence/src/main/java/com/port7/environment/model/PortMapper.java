@@ -8,6 +8,8 @@
  */
 package com.port7.environment.model;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 import javax.ejb.Stateless;
@@ -45,10 +47,22 @@ public class PortMapper implements PortMapperLocal {
 		return getByName(port.getEnglishName());
 	}
 
+	/* (non-Javadoc)
+	 * @see com.port7.environment.model.PortMapperLocal#getByName(java.lang.String)
+	 */
 	@Override
 	public PortJPA getByName(String englishName) {
 		TypedQuery<PortJPA> query = manager.createNamedQuery("port-by-alias", PortJPA.class);
 		query.setParameter("name", englishName.toUpperCase(Locale.ENGLISH));
 		return query.getSingleResult();
+	}
+	
+	/* (non-Javadoc)
+	 * @see com.port7.environment.model.PortMapperLocal#getNamesAndAliases()
+	 */
+	@Override
+	public List<String> getNamesAndAliases() {
+		TypedQuery<String> query = manager.createNamedQuery("all-port-aliases", String.class);
+		return new ArrayList<String>(query.getResultList());
 	}
 }

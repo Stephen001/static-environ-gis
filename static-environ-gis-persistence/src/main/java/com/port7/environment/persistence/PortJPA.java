@@ -26,7 +26,7 @@ import com.vividsolutions.jts.geom.Point;
 @NamedQueries(
 		@NamedQuery(name = "port-by-name", query = "SELECT p FROM PortJPA p WHERE UPPER(p.englishName) = :englishName")
 		)
-public class PortJPA extends AbstractEntity {
+public class PortJPA extends AbstractEntityJPA {
 	@Column(nullable = false, unique = true)
 	private String englishName;
 	@Column(nullable = false)

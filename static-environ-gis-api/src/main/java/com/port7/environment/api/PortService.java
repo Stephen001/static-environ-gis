@@ -8,6 +8,8 @@
  */
 package com.port7.environment.api;
 
+import java.util.List;
+
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
@@ -30,5 +32,13 @@ public class PortService implements PortServiceRemote {
 	@Override
 	public Port getByEnglishName(final String englishName) {
 		return mapper.mapToDTO(mapper.getByName(englishName));
+	}
+	
+	/* (non-Javadoc)
+	 * @see com.port7.environment.api.PortServiceRemote#getPortNamesAndAliases()
+	 */
+	@Override
+	public List<String> getPortNamesAndAliases() {
+		return mapper.getNamesAndAliases();
 	}
 }

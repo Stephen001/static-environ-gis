@@ -8,12 +8,14 @@
  */
 package com.port7.environment.api;
 
+import java.util.List;
+
 import javax.ejb.Remote;
 
 import com.port7.environment.model.Country;
 
 /**
- * A service for getting {@link Country}s manipulating them.
+ * A service for getting {@link Country}s and manipulating them.
  * 
  * @author Stephen Badger [stephen@port7.dk]
  */
@@ -35,4 +37,11 @@ public interface CountryServiceRemote {
 	 * @return True if the port is within the bounds of the named country, false otherwise.
 	 */
 	public boolean isPortInCountry(final String portName, final String countryName);
+	
+	/**
+	 * Gets all country names and aliases.
+	 * 
+	 * @return All country names and aliases.
+	 */
+	public List<String> getCountryNamesAndAliases();
 }

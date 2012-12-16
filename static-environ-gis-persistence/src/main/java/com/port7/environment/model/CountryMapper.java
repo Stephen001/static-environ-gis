@@ -8,6 +8,8 @@
  */
 package com.port7.environment.model;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 import javax.ejb.Stateless;
@@ -47,10 +49,22 @@ public class CountryMapper implements CountryMapperLocal {
 		return getByName(country.getEnglishName());
 	}
 
+	/* (non-Javadoc)
+	 * @see com.port7.environment.model.CountryMapperLocal#getByName(java.lang.String)
+	 */
 	@Override
 	public CountryJPA getByName(String englishName) {
 		TypedQuery<CountryJPA> query = manager.createNamedQuery("country-by-alias", CountryJPA.class);
 		query.setParameter("name", englishName.toUpperCase(Locale.ENGLISH));
 		return query.getSingleResult();
+	}
+
+	/* (non-Javadoc)
+	 * @see com.port7.environment.model.CountryMapperLocal#getNamesAndAliases()
+	 */
+	@Override
+	public List<String> getNamesAndAliases() {
+		TypedQuery<String> query = manager.createNamedQuery("all-country-aliases", String.class);
+		return new ArrayList<String>(query.getResultList());
 	}
 }

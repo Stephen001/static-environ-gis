@@ -22,10 +22,11 @@ import javax.persistence.NamedQuery;
  * @author Stephen Badger [stephen@port7.dk]
  */
 @Entity
-@NamedQueries(
-		@NamedQuery(name = "country-from-alias", query = "SELECT p.country FROM CountryAliasJPA p WHERE UPPER(p.name) = :name")
-		)
-public class CountryAliasJPA extends AbstractEntity {
+@NamedQueries({
+		@NamedQuery(name = "country-from-alias", query = "SELECT p.country FROM CountryAliasJPA p WHERE UPPER(p.name) = :name"),
+		@NamedQuery(name = "all-country-aliases", query = "SELECT p.name FROM CountryAliasJPA p")
+})
+public class CountryAliasJPA extends AbstractEntityJPA {
 	@Column(nullable = false, unique = true)
 	private String name;
 	@ManyToOne(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)

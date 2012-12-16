@@ -8,12 +8,14 @@
  */
 package com.port7.environment.api;
 
+import java.util.List;
+
 import javax.ejb.Remote;
 
 import com.port7.environment.model.Port;
 
 /**
- * A service for getting {@link Port}s manipulating them.
+ * A service for getting {@link Port}s and manipulating them.
  * 
  * @author Stephen Badger [stephen@port7.dk]
  */
@@ -26,4 +28,11 @@ public interface PortServiceRemote {
 	 * @return A Port.
 	 */
 	public Port getByEnglishName(final String englishName);
+	
+	/**
+	 * Gets all port names and aliases.
+	 * 
+	 * @return All port names and aliases.
+	 */
+	public List<String> getPortNamesAndAliases();
 }

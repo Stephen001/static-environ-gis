@@ -8,6 +8,8 @@
  */
 package com.port7.environment.model;
 
+import java.util.List;
+
 import javax.ejb.Local;
 
 import com.port7.environment.persistence.CountryJPA;
@@ -43,4 +45,11 @@ public interface CountryMapperLocal {
 	 * @return The entity.
 	 */
 	public CountryJPA getByName(final String englishName);
+	
+	/**
+	 * Gets all country names and aliases.
+	 * 
+	 * @return All country names and aliases.
+	 */
+	public List<String> getNamesAndAliases();
 }

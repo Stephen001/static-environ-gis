@@ -26,7 +26,7 @@ import com.vividsolutions.jts.geom.Polygon;
 @NamedQueries(
 		@NamedQuery(name = "country-by-name", query = "SELECT c FROM CountryJPA c WHERE UPPER(c.englishName) = :englishName")
 		)
-public class CountryJPA extends AbstractEntity {
+public class CountryJPA extends AbstractEntityJPA {
 	@Column(nullable = false, unique = true)
 	private String  englishName;
 	@Column(nullable = false, unique = true)
