@@ -13,6 +13,9 @@ import javax.ejb.Stateless;
 
 import com.port7.environment.model.Country;
 import com.port7.environment.model.CountryMapperLocal;
+import com.port7.environment.model.PortMapperLocal;
+import com.port7.environment.persistence.CountryJPA;
+import com.port7.environment.persistence.PortJPA;
 
 /**
  * A service for getting {@link Country}s manipulating them.
@@ -22,13 +25,25 @@ import com.port7.environment.model.CountryMapperLocal;
 @Stateless
 public class CountryService implements CountryServiceRemote {
 	@EJB
-	private CountryMapperLocal mapper;
+	private CountryMapperLocal countryMapper;
+	@EJB
+	private PortMapperLocal portMapper;
 	
 	/* (non-Javadoc)
 	 * @see com.port7.environment.api.CountryServiceRemote#getByEnglishName(java.lang.String)
 	 */
 	@Override
 	public Country getByEnglishName(final String englishName) {
-		return mapper.mapToDTO(mapper.getByName(englishName));
+		return countryMapper.mapToDTO(countryMapper.getByName(englishName));
+	}
+
+	/* (non-Javadoc)
+	 * @see com.port7.environment.api.CountryServiceRemote#isPortInCountry(java.lang.String, java.lang.String)
+	 */
+	@Override
+	public boolean isPortInCountry(String portName, String countryName) {
+		CountryJPA country = countryMapper.getByName(countryName);
+		PortJPA port = portMapper.getByName(portName);
+		return port.getLocation().within(country.getLandMassShape());
 	}
 }

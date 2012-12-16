@@ -26,4 +26,13 @@ public interface CountryServiceRemote {
 	 * @return A Country.
 	 */
 	public Country getByEnglishName(final String englishName);
+	
+	/**
+	 * Checks if a given port is within the bounds of the provided country.
+	 * 
+	 * @param portName The port to check.
+	 * @param countryName The country to check for.
+	 * @return True if the port is within the bounds of the named country, false otherwise.
+	 */
+	public boolean isPortInCountry(final String portName, final String countryName);
 }
