@@ -18,7 +18,7 @@ import org.hibernate.annotations.Type;
 import com.vividsolutions.jts.geom.Polygon;
 
 /**
- * A JPA implementation of a country. Queries will mostly use the twoCountryCode to identify data.
+ * A JPA implementation of a country. Queries will mostly use the englishName to identify data.
  * 
  * @author Stephen Badger [stephen@port7.dk]
  */
@@ -78,7 +78,7 @@ public class CountryJPA extends AbstractEntity {
 	 * 
 	 * @param englishName The English country name for this country.
 	 */
-	public void setEnglishName(String englishName) {
+	public void setEnglishName(final String englishName) {
 		this.englishName = englishName;
 	}
 	
@@ -87,7 +87,7 @@ public class CountryJPA extends AbstractEntity {
 	 * 
 	 * @param twoCountryCode The two character country code for this country.
 	 */
-	public void setTwoCountryCode(String twoCountryCode) {
+	public void setTwoCountryCode(final String twoCountryCode) {
 		this.twoCountryCode = twoCountryCode;
 	}
 	
@@ -96,7 +96,7 @@ public class CountryJPA extends AbstractEntity {
 	 * 
 	 * @param threeCountryCode The three character country code for this country.
 	 */
-	public void setThreeCountryCode(String threeCountryCode) {
+	public void setThreeCountryCode(final String threeCountryCode) {
 		this.threeCountryCode = threeCountryCode;
 	}
 	
@@ -105,7 +105,7 @@ public class CountryJPA extends AbstractEntity {
 	 * 
 	 * @param landMassShape The polygon representing this Country's land mass.
 	 */
-	public void setLandMassShape(Polygon landMassShape) {
+	public void setLandMassShape(final Polygon landMassShape) {
 		this.landMassShape = landMassShape;
 	}
 }
