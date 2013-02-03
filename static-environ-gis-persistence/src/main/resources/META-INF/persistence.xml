@@ -11,6 +11,9 @@
 		<class>com.port7.environment.persistence.PortJPA</class>
 		<class>com.port7.environment.persistence.PortAliasJPA</class>
 		
+		<class>com.port7.environment.persistence.UserJPA</class>
+		<class>com.port7.environment.persistence.GroupJPA</class>
+		
 		<exclude-unlisted-classes>true</exclude-unlisted-classes>
 		
 		<properties>

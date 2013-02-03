@@ -26,6 +26,11 @@
 			<artifactId>static-environ-gis-api</artifactId>
 			<type>ejb</type>
 		</dependency>
+		<dependency>
+	        <groupId>com.port7.component</groupId>
+	        <artifactId>static-environ-gis-admin</artifactId>
+	        <type>war</type>
+	    </dependency>
 	</dependencies>
 
 	<build>
@@ -44,6 +49,11 @@
 							<groupId>com.port7.component</groupId>
 							<artifactId>static-environ-gis-api</artifactId>
 						</ejbModule>
+						<webModule>
+							<groupId>com.port7.component</groupId>
+							<artifactId>static-environ-gis-admin</artifactId>
+							<contextRoot>/admin</contextRoot>
+						</webModule>
 					</modules>
 				</configuration>
 			</plugin>
