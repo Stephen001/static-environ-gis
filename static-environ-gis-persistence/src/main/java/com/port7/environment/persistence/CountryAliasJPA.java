@@ -30,7 +30,6 @@ public class CountryAliasJPA extends AbstractEntityJPA {
 	@Column(nullable = false, unique = true)
 	private String name;
 	@ManyToOne(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
-	@Column(nullable = false)
 	private CountryJPA country;
 	
 	/**

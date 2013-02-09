@@ -24,13 +24,12 @@ import javax.persistence.NamedQuery;
 @Entity
 @NamedQueries({
 		@NamedQuery(name = "port-from-alias", query = "SELECT p.port FROM PortAliasJPA p WHERE UPPER(p.name) = :name"),
-		@NamedQuery(name = "all-port-aliases", query = "SELECT p.name FROM PortJPA p")
+		@NamedQuery(name = "all-port-aliases", query = "SELECT p.name FROM PortAliasJPA p")
 })
 public class PortAliasJPA extends AbstractEntityJPA {
 	@Column(nullable = false, unique = true)
 	private String name;
 	@ManyToOne(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
-	@Column(nullable = false)
 	private PortJPA port;
 	
 	/**
