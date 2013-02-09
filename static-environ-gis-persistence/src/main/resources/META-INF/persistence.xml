@@ -13,6 +13,7 @@
 		
 		<class>com.port7.environment.persistence.UserJPA</class>
 		<class>com.port7.environment.persistence.GroupJPA</class>
+		<class>com.port7.environment.persistence.UserJPAGroupJPA</class>
 		
 		<exclude-unlisted-classes>true</exclude-unlisted-classes>
 		
@@ -20,7 +21,7 @@
 			<!-- Needed for OpenGIS -->
 			<property name="hibernate.dialect" value="org.hibernatespatial.mysql.MySQLSpatialInnoDBDialect" />
 			<!-- Auto-updates the schema. Remove for a production system. -->
-			<property name="hibernate.hbm2ddl.auto" value="update" />
+			<property name="hibernate.hbm2ddl.auto" value="validate" />
 		</properties>
 	</persistence-unit>
 </persistence>

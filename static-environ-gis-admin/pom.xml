@@ -19,5 +19,10 @@
             <groupId>com.port7.component</groupId>
             <artifactId>static-environ-gis-model</artifactId>
        	</dependency>
+       	
+       	<dependency>
+			<groupId>javax</groupId>
+			<artifactId>javaee-api</artifactId>
+		</dependency>
 	</dependencies>
 </project>
