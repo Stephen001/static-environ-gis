@@ -30,6 +30,14 @@ public interface PortServiceRemote {
 	public Port getByEnglishName(final String englishName);
 	
 	/**
+	 * Searches for Ports by their name or alias, partial matches are permitted.
+	 * 
+	 * @param term The search term to use.
+	 * @return A (potentially empty) list of results.
+	 */
+	public List<Port> searchPortByNameOrAlias(final String term);
+	
+	/**
 	 * Gets all port names and aliases.
 	 * 
 	 * @return All port names and aliases.

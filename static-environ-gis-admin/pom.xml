@@ -19,6 +19,11 @@
             <groupId>com.port7.component</groupId>
             <artifactId>static-environ-gis-model</artifactId>
        	</dependency>
+       	<dependency>
+            <groupId>com.port7.component</groupId>
+            <artifactId>static-environ-gis-api</artifactId>
+            <type>ejb-client</type>
+       	</dependency>
        	
        	<dependency>
 			<groupId>javax</groupId>

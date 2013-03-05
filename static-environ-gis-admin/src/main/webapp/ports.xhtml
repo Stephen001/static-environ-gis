@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core"  xmlns:h="http://java.sun.com/jsf/html">
+	<h:head>
+		<title>Static Environment GIS :: Administration :: Ports</title>
+		<link rel="stylesheet" type="text/css" href="default.css" />
+	</h:head>
+	<h:body>
+		<h1>Ports</h1>
+		<h2>Search</h2>
+		<div>
+			<h:form id="portSearch">
+				<h:panelGroup>
+					<h:outputLabel value="Full Name:" for="fullName" />
+					<h:inputText id="term" value="#{PortSearch.term}">
+						<f:ajax render="results" listener="#{PortSearch.search}"/>
+					</h:inputText>
+					<h:dataTable id="results" value="#{PortSearch.results}" var="port" rendered="#{not empty PortSearch.results}">
+						<h:column>
+							<h:outputText value="#{port.englishName}" />
+						</h:column>
+					</h:dataTable>
+				</h:panelGroup>
+			</h:form>
+		</div>
+	</h:body>
+</html>
