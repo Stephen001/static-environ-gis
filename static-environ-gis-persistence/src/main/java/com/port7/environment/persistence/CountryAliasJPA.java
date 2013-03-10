@@ -24,6 +24,8 @@ import javax.persistence.NamedQuery;
 @Entity
 @NamedQueries({
 		@NamedQuery(name = "country-from-alias", query = "SELECT p.country FROM CountryAliasJPA p WHERE UPPER(p.name) = :name"),
+		@NamedQuery(name = "existing-alias-for-country", query = "SELECT p FROM CountryAliasJPA p WHERE UPPER(p.name) = :name AND p.country = :country"),
+		@NamedQuery(name = "aliases-from-country", query = "SELECT p FROM CountryAliasJPA p WHERE p.country = :country"),
 		@NamedQuery(name = "all-country-aliases", query = "SELECT p.name FROM CountryAliasJPA p")
 })
 public class CountryAliasJPA extends AbstractEntityJPA {

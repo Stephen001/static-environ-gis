@@ -13,6 +13,7 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
+import com.port7.environment.dao.CountryDAOLocal;
 import com.port7.environment.model.Country;
 import com.port7.environment.model.CountryMapperLocal;
 import com.port7.environment.model.PortMapperLocal;
@@ -30,6 +31,9 @@ public class CountryService implements CountryServiceRemote {
 	private CountryMapperLocal countryMapper;
 	@EJB
 	private PortMapperLocal portMapper;
+	@EJB
+	private CountryDAOLocal countryDAO;
+	
 	
 	/* (non-Javadoc)
 	 * @see com.port7.environment.api.CountryServiceRemote#getByEnglishName(java.lang.String)
@@ -55,5 +59,43 @@ public class CountryService implements CountryServiceRemote {
 	@Override
 	public List<String> getCountryNamesAndAliases() {
 		return countryMapper.getNamesAndAliases();
+	}
+
+	/* (non-Javadoc)
+	 * @see com.port7.environment.api.CountryServiceRemote#addAlias(java.lang.String, com.port7.environment.model.Country)
+	 */
+	@Override
+	public void addAlias(String alias, Country country) {
+		CountryJPA countryJPA = countryMapper.getByName(country.getEnglishName());
+		if (countryJPA != null) {
+			countryDAO.addAlias(alias, countryJPA);
+		}
+	}
+
+	/* (non-Javadoc)
+	 * @see com.port7.environment.api.CountryServiceRemote#removeAlias(java.lang.String, com.port7.environment.model.Country)
+	 */
+	@Override
+	public void removeAlias(String alias, Country country) {
+		CountryJPA countryJPA = countryMapper.getByName(country.getEnglishName());
+		if (countryJPA != null) {
+			countryDAO.removeAlias(alias, countryJPA);
+		}
+	}
+
+	/* (non-Javadoc)
+	 * @see com.port7.environment.api.CountryServiceRemote#updateCountryInfo(java.lang.String, com.port7.environment.model.Country)
+	 */
+	@Override
+	public void updateCountryInfo(String oldEnglishName, Country country) {
+		countryDAO.updateMetadata(oldEnglishName, country);
+	}
+	
+	/* (non-Javadoc)
+	 * @see com.port7.environment.api.CountryServiceRemote#deleteCountry(com.port7.environment.model.Country)
+	 */
+	@Override
+	public void deleteCountry(final Country country) {
+		countryDAO.delete(countryMapper.getByName(country.getEnglishName()));
 	}
 }

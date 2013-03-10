@@ -44,4 +44,37 @@ public interface CountryServiceRemote {
 	 * @return All country names and aliases.
 	 */
 	public List<String> getCountryNamesAndAliases();
+	
+	/**
+	 * Adds an alias to the specified country.
+	 * 
+	 * @param alias The alias for the country.
+	 * @param country The country to alias.
+	 */
+	public void addAlias(final String alias, final Country country);
+	
+	/**
+	 * Removes an alias to the specified country.
+	 * 
+	 * @param alias The alias for the country.
+	 * @param country The country to alias.
+	 */
+	public void removeAlias(final String alias, final Country country);
+	
+	/**
+	 * Updates country information. In order to map english name corrections, the old name
+	 * must be provided. If you are just updating other information, the existing name can
+	 * be provided.
+	 * 
+	 * @param oldEnglishName The old english name for this country.
+	 * @param country The updated country information.
+	 */
+	public void updateCountryInfo(final String oldEnglishName, final Country country);
+	
+	/**
+	 * Deletes a country (and all aliases) from the system.
+	 * 
+	 * @param country The country to delete.
+	 */
+	public void deleteCountry(final Country country);
 }
