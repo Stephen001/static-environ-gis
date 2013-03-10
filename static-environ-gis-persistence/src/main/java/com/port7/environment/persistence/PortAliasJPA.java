@@ -24,6 +24,8 @@ import javax.persistence.NamedQuery;
 @Entity
 @NamedQueries({
 		@NamedQuery(name = "port-from-alias", query = "SELECT p.port FROM PortAliasJPA p WHERE UPPER(p.name) = :name"),
+		@NamedQuery(name = "existing-alias-for-port", query = "SELECT p FROM PortAliasJPA p WHERE UPPER(p.name) = :name AND p.port = :port"),
+		@NamedQuery(name = "aliases-from-port", query = "SELECT p FROM PortAliasJPA p WHERE p.port = :port"),
 		@NamedQuery(name = "all-port-aliases", query = "SELECT p.name FROM PortAliasJPA p")
 })
 public class PortAliasJPA extends AbstractEntityJPA {

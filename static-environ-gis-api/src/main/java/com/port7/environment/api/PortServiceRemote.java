@@ -12,6 +12,7 @@ import java.util.List;
 
 import javax.ejb.Remote;
 
+import com.port7.environment.model.Country;
 import com.port7.environment.model.Port;
 
 /**
@@ -43,4 +44,37 @@ public interface PortServiceRemote {
 	 * @return All port names and aliases.
 	 */
 	public List<String> getPortNamesAndAliases();
+	
+	/**
+	 * Adds an alias to the specified port.
+	 * 
+	 * @param alias The alias for the port.
+	 * @param port The port to alias.
+	 */
+	public void addAlias(final String alias, final Port port);
+	
+	/**
+	 * Removes an alias to the specified port.
+	 * 
+	 * @param alias The alias for the port.
+	 * @param port The port to alias.
+	 */
+	public void removeAlias(final String alias, final Port port);
+	
+	/**
+	 * Updates port information. In order to map english name corrections, the old name
+	 * must be provided. If you are just updating other information, the existing name can
+	 * be provided.
+	 * 
+	 * @param oldEnglishName The old english name for this port.
+	 * @param port The updated port information.
+	 */
+	public void updatePortInfo(final String oldEnglishName, final Port port);
+	
+	/**
+	 * Deletes a port (and all aliases) from the system.
+	 * 
+	 * @param port The port to delete.
+	 */
+	public void deletePort(final Port port);
 }

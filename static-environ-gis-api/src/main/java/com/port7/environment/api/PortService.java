@@ -56,4 +56,42 @@ public class PortService implements PortServiceRemote {
 		}
 		return results;
 	}
+
+	/* (non-Javadoc)
+	 * @see com.port7.environment.api.PortServiceRemote#addAlias(java.lang.String, com.port7.environment.model.Port)
+	 */
+	@Override
+	public void addAlias(String alias, Port port) {
+		PortJPA portJPA = mapper.getByName(port.getEnglishName());
+		if (portJPA != null) {
+			dao.addAlias(alias, portJPA);
+		}
+	}
+
+	/* (non-Javadoc)
+	 * @see com.port7.environment.api.PortServiceRemote#removeAlias(java.lang.String, com.port7.environment.model.Port)
+	 */
+	@Override
+	public void removeAlias(String alias, Port port) {
+		PortJPA portJPA = mapper.getByName(port.getEnglishName());
+		if (portJPA != null) {
+			dao.removeAlias(alias, portJPA);
+		}
+	}
+
+	/* (non-Javadoc)
+	 * @see com.port7.environment.api.PortServiceRemote#updatePortInfo(java.lang.String, com.port7.environment.model.Port)
+	 */
+	@Override
+	public void updatePortInfo(String oldEnglishName, Port port) {
+		dao.updateMetadata(oldEnglishName, port);
+	}
+	
+	/* (non-Javadoc)
+	 * @see com.port7.environment.api.PortServiceRemote#deletePort(com.port7.environment.model.Port)
+	 */
+	@Override
+	public void deletePort(final Port port) {
+		dao.delete(mapper.getByName(port.getEnglishName()));
+	}
 }
