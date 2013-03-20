@@ -72,7 +72,7 @@ public class PortDAO implements PortDAOLocal {
 			c = new PortJPA();
 			needsPersist = true;
 		}
-		c.setLocation(port.getLocation());
+		c.setLocation(port.getGeometry());
 		c.setEnglishName(port.getEnglishName());
 		if (needsPersist) {
 			em.persist(c);

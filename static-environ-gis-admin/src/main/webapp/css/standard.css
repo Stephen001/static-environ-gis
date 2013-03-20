@@ -1,0 +1,8 @@
+div, h1 {
+	margin: 10 auto;
+}
+
+div#map {
+	width: 600px;
+	height: 600px;
+}

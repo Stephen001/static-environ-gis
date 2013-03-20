@@ -53,7 +53,7 @@ public class CountryDAO implements CountryDAOLocal {
 		TypedQuery<CountryJPA> query = em.createNamedQuery("country-by-name", CountryJPA.class);
 		query.setParameter("englishName", oldName);
 		CountryJPA c = query.getSingleResult();
-		c.setLandMassShape(country.getLandMassShape());
+		c.setLandMassShape(country.getGeometry());
 		c.setThreeCountryCode(country.getThreeCharCountryCode());
 		c.setTwoCountryCode(country.getTwoCharCountryCode());
 		c.setEnglishName(country.getEnglishName());

@@ -68,7 +68,7 @@ public final class CountryImpl implements Country {
 	 * @see com.port7.environment.model.Country#getLandMassShape()
 	 */
 	@Override
-	public Polygon getLandMassShape() {
+	public Polygon getGeometry() {
 		return landMassShape;
 	}
 	

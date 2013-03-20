@@ -10,25 +10,26 @@ package com.port7.environment.model;
 
 import java.io.Serializable;
 
-import com.vividsolutions.jts.geom.Point;
+import com.vividsolutions.jts.geom.Polygon;
 
 /**
- * A geographical representation of a port on the globe.
+ * A geographical representation of a area on the globe. Areas are very general, and typically do not encompass
+ * internationally defined standards.
  * 
  * @author Stephen Badger [stephen@port7.dk]
  */
-public interface Port extends Serializable, Location {
+public interface Area extends Location, Serializable {
 	/**
-	 * Returns the English port name for this port. This will be unique to each port instance.
+	 * Returns the English port name for this area. This will be unique to each area.
 	 * 
-	 * @return The English port name for this port.
+	 * @return The English port name for this area.
 	 */
 	public String getEnglishName();
 	
 	/**
-	 * Gets the point that represents this Port's location on the globe.
+	 * Gets the polygon that represents this Area.
 	 * 
-	 * @return The point that represents this Port's location on the globe.
+	 * @return The polygon representing this Area.
 	 */
-	public Point getGeometry();
+	public Polygon getGeometry();
 }

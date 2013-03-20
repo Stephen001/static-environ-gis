@@ -43,7 +43,7 @@ public final class PortImpl implements Port {
 	 * @see com.port7.environment.model.Port#getLocation()
 	 */
 	@Override
-	public Point getLocation() {
+	public Point getGeometry() {
 		return location;
 	}
 }

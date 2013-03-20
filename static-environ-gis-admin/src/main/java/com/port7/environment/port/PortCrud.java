@@ -89,8 +89,7 @@ public class PortCrud {
 		service.deletePort(port);
 		englishName = null;
 		coordinate = null;
-		FacesContext context = FacesContext.getCurrentInstance();
-		PortSearch search = (PortSearch) context.getApplication().evaluateExpressionGet(context, "#{PortSearch}", PortSearch.class);
+		PortSearch search = getSearchBean();
 		if (search.getResults() != null) {
 			search.getResults().remove(port);
 		}
@@ -98,7 +97,8 @@ public class PortCrud {
 	
 	public void edit(Port port) {
 		setEnglishName(port.getEnglishName());
-		setCoordinate(getCoordinateString(port.getLocation()));
+		setCoordinate(getCoordinateString(port.getGeometry()));
+		setAliases(getAliasString(port));
 	}
 
 	public String getAliases() {
@@ -107,5 +107,10 @@ public class PortCrud {
 
 	public void setAliases(String aliases) {
 		this.aliases = aliases;
+	}
+	
+	private PortSearch getSearchBean() {
+		FacesContext context = FacesContext.getCurrentInstance();
+		return (PortSearch) context.getApplication().evaluateExpressionGet(context, "#{PortSearch}", PortSearch.class);
 	}
 }

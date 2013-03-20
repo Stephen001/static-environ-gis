@@ -1,10 +1,56 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core"  xmlns:h="http://java.sun.com/jsf/html">
 	<h:head>
 		<title>Static Environment GIS :: Administration :: Ports</title>
-		<link rel="stylesheet" type="text/css" href="css/default.css" />
+		<link rel="stylesheet" type="text/css" href="css/standard.css" />
+		<script type="text/javascript"
+		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBQVcskY0Eb6qqr6G32oVc-4knZQsJicj0&amp;sensor=false">
+		</script>
+		<script type="text/javascript">	
+			var map;
+			var marker;
+		
+			function placeMarker(location) {
+				 if (!marker) {
+					  marker = new google.maps.Marker({
+					      position: location,
+					      map: map
+					  });
+				  } else {
+					  marker.setPosition(location);
+				  }
+				  map.setCenter(location);
+				  var field = document.getElementById("portCreate:coordinate");
+				  field.value = "POINT (" + location.lat() + " " + location.lng() + ")";
+			}
+			
+			function initialize() {
+				var mapOptions = {
+					center : new google.maps.LatLng(55.761123, 13.084717),
+					zoom : 5,
+					mapTypeId : google.maps.MapTypeId.SATELLITE
+				};
+				map = new google.maps.Map(
+						document.getElementById("map"), mapOptions);
+				
+				google.maps.event.addListener(map, 'click', function(event) {
+					placeMarker(event.latLng);
+				});
+				
+				setMarker(document.getElementById("portCreate:coordinate"));
+			}
+			
+			google.maps.event.addDomListener(window, 'load', initialize);
+			
+			function setMarker(field) {
+				if (field.value) {
+					var regex = /POINT.+?([-0-9\.]+).+?([-0-9\.]+)/;
+					var matches = regex.exec(field.value);
+					placeMarker(new google.maps.LatLng(Number(matches[1]), Number(matches[2])));
+				}
+			}
+		</script>
 	</h:head>
 	<h:body>
 		<h1>Ports</h1>
@@ -12,12 +58,19 @@
 		<div>
 			<h:form id="portCreate">
 				<h:panelGroup>
-					<h:outputLabel value="English Name" for="englishName" />
-					<h:inputText id="englishName" value="#{PortCrud.englishName}" />
-					<h:outputLabel value="Coordinate" for="coordinate" />
-					<h:inputText id="coordinate" value="#{PortCrud.coordinate}" />
-					<h:outputLabel value="Aliases" for="aliases" />
-					<h:inputText id="aliases" value="#{PortCrud.aliases}" />
+					<div>
+						<h:outputLabel value="English Name" for="englishName" />
+						<h:inputText id="englishName" value="#{PortCrud.englishName}" />
+					</div>
+					<div>
+						<h:outputLabel value="Aliases" for="aliases" />
+						<h:inputText id="aliases" value="#{PortCrud.aliases}" />
+					</div>
+					<div>
+						<h:outputLabel value="Coordinate" for="coordinate" />
+						<h:inputText id="coordinate" value="#{PortCrud.coordinate}" onchange="setMarker(this);" />
+						<div id="map" />
+					</div>
 					<h:commandButton value="Create / Edit Port" action="#{PortCrud.persist}" />
 				</h:panelGroup>
 			</h:form>
@@ -43,7 +96,7 @@
 								<f:facet name="header">
 									<h:outputText value="Coordinates" />
 								</f:facet>
-								<h:outputText value="#{PortCrud.getCoordinateString(port.location)}" />
+								<h:outputText value="#{PortCrud.getCoordinateString(port.geometry)}" />
 							</h:column>
 							<h:column>
 								<f:facet name="header">

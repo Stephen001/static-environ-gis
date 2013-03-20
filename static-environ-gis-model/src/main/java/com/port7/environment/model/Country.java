@@ -17,7 +17,7 @@ import com.vividsolutions.jts.geom.Polygon;
  * 
  * @author Stephen Badger [stephen@port7.dk]
  */
-public interface Country extends Serializable {
+public interface Country extends Serializable, Location {
 	/**
 	 * Returns the English country name for this country, as defined by ISO 3166-1. This will be unique to each country instance.
 	 * 
@@ -44,5 +44,5 @@ public interface Country extends Serializable {
 	 * 
 	 * @return The polygon representing this Country's land mass.
 	 */
-	public Polygon getLandMassShape();
+	public Polygon getGeometry();
 }
