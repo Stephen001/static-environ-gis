@@ -13,14 +13,20 @@
 			<h:form id="portSearch">
 				<h:panelGroup>
 					<h:outputLabel value="Full Name:" for="fullName" />
-					<h:inputText id="term" value="#{PortSearch.term}">
-						<f:ajax render="results" listener="#{PortSearch.search}"/>
-					</h:inputText>
-					<h:dataTable id="results" value="#{PortSearch.results}" var="port" rendered="#{not empty PortSearch.results}">
-						<h:column>
-							<h:outputText value="#{port.englishName}" />
-						</h:column>
-					</h:dataTable>
+					<h:inputText id="term" value="#{PortSearch.term}" />
+					<h:commandButton value="Search Ports" action="#{PortSearch.search}">
+						<f:ajax execute="@form" render="results" />
+					</h:commandButton>
+					<h:panelGroup id="results">
+						<h:dataTable value="#{PortSearch.results}" var="port" rendered="#{not empty PortSearch.results}">
+							<h:column>
+								<f:facet name="header">
+									<h:outputText value="English Name" />
+								</f:facet>
+								<h:outputText value="#{port.englishName}" />
+							</h:column>
+						</h:dataTable>
+					</h:panelGroup>
 				</h:panelGroup>
 			</h:form>
 		</div>

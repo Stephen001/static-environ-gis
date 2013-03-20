@@ -6,7 +6,6 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
-import javax.faces.event.AjaxBehaviorEvent;
 
 import com.port7.environment.api.PortServiceRemote;
 import com.port7.environment.model.Port;
@@ -20,7 +19,7 @@ public class PortSearch {
 	@EJB
 	private PortServiceRemote service;
 	
-	public void search(AjaxBehaviorEvent event) {
+	public void search() {
 		setResults(service.searchPortByNameOrAlias(term == null ? "" : term));
 	}
 
