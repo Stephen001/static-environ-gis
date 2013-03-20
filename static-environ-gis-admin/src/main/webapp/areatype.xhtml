@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core"  xmlns:h="http://java.sun.com/jsf/html">
+	<h:head>
+		<title>Static Environment GIS :: Administration :: Area Types</title>
+		<link rel="stylesheet" type="text/css" href="css/standard.css" />
+	</h:head>
+	<h:body>
+		<h1>Area Types</h1>
+		<h2>Create / Remove</h2>
+		<h:form id="areaTypeCRUD">
+			<h:panelGroup>
+				<div>
+					<h:inputText id="type" value="#{AreaTypeCrud.type}" />
+				</div>
+				<div>
+					<h:commandButton value="Create" action="#{AreaTypeCrud.create}" />
+					<h:commandButton value="Delete" action="#{AreaTypeCrud.delete}" />
+				</div>
+			</h:panelGroup>
+		</h:form>
+		<h2>List</h2>
+		<h:dataTable value="#{AreaTypeList.listTypes()}" var="type">
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="Name" />
+				</f:facet>
+				<h:outputText value="#{type}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="Number of Areas" />
+				</f:facet>
+				<h:outputText value="#{AreaTypeList.count(type)}" />
+			</h:column>
+		</h:dataTable>
+	</h:body>
+</html>

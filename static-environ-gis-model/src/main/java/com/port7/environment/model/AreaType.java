@@ -25,4 +25,12 @@ public final class AreaType {
 	public int hashCode() {
 		return 19 + typeName.hashCode();
 	}
+	
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return typeName;
+	}
 }

@@ -10,9 +10,12 @@ package com.port7.environment.persistence;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 
+import org.hibernate.annotations.Index;
 import org.hibernate.annotations.Type;
 
 import com.vividsolutions.jts.geom.Polygon;
@@ -24,7 +27,7 @@ import com.vividsolutions.jts.geom.Polygon;
  */
 @Entity
 @NamedQueries(
-		@NamedQuery(name = "area-by-name", query = "SELECT c FROM areaJPA c WHERE UPPER(c.englishName) = :englishName")
+		@NamedQuery(name = "area-by-name", query = "SELECT c FROM AreaJPA c WHERE UPPER(c.englishName) = :englishName")
 		)
 public class AreaJPA extends AbstractEntityJPA {
 	@Column(nullable = false, unique = true)
@@ -32,7 +35,8 @@ public class AreaJPA extends AbstractEntityJPA {
 	@Column(nullable = false)
 	@Type(type = "org.hibernatespatial.GeometryUserType")
 	private Polygon landMassShape;
-	@Column(nullable = false)
+	@ManyToOne(fetch = FetchType.EAGER)
+	@Index(name = "areatype")
 	private AreaTypeJPA type;
 	
 	/**

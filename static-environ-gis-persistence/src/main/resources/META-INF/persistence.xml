@@ -6,8 +6,9 @@
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
 		<jta-data-source>jdbc/static-environ-gis</jta-data-source>
 		
-		<class>com.port7.environment.persistence.CountryJPA</class>
-		<class>com.port7.environment.persistence.CountryAliasJPA</class>
+		<class>com.port7.environment.persistence.AreaJPA</class>
+		<class>com.port7.environment.persistence.AreaAliasJPA</class>
+		<class>com.port7.environment.persistence.AreaTypeJPA</class>
 		<class>com.port7.environment.persistence.PortJPA</class>
 		<class>com.port7.environment.persistence.PortAliasJPA</class>
 		
@@ -19,7 +20,7 @@
 		
 		<properties>
 			<!-- Needed for OpenGIS -->
-			<property name="hibernate.dialect" value="org.hibernatespatial.mysql.MySQLSpatialInnoDBDialect" />
+			<property name="hibernate.dialect" value="org.hibernatespatial.mysql.MySQLSpatialDialect" />
 			<!-- Auto-updates the schema. Remove for a production system. -->
 			<property name="hibernate.hbm2ddl.auto" value="validate" />
 		</properties>
