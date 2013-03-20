@@ -1,6 +1,9 @@
 package com.port7.environment.model;
 
-public final class AreaType {
+import java.io.Serializable;
+
+public final class AreaType implements Serializable {
+	private static final long serialVersionUID = 3711660565697383111L;
 	private final String typeName;
 	
 	public AreaType(final String typeName) {

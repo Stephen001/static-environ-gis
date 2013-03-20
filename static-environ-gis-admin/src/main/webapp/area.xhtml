@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core"  xmlns:h="http://java.sun.com/jsf/html">
+	<h:head>
+		<title>Static Environment GIS :: Administration :: Areas</title>
+		<link rel="stylesheet" type="text/css" href="css/standard.css" />
+		<script type="text/javascript"
+		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBQVcskY0Eb6qqr6G32oVc-4knZQsJicj0&amp;sensor=false">
+		</script>
+		<script type="text/javascript">	
+			var map;
+			var area;
+			var coordinates = new Array();
+		
+			function addCoordinate(location) {
+				 coordinates.push(location);
+				 if (!area) {
+					  area = new google.maps.Polygon({
+					      paths: coordinates,
+					      map: map,
+					      strokeColor: "#FF8080",
+					      strokeOpacity: 0.8,
+					      strokeWeight: 2,
+					      fillColor: "#FF8080",
+					      fillOpacity: 0.35
+					  });
+				  } else {
+					  area.setPath(coordinates);
+				  }
+				  var field = document.getElementById("areaCreate:coordinates");
+				  var newValue = "POLYGON ((";
+				  for (var i = 0; i &lt; coordinates.length; i++) {
+					  newValue += coordinates[i].lat() + " " + coordinates[i].lng() + ", ";
+				  }
+				  newValue += coordinates[0].lat() + " " + coordinates[0].lng() + ", ";
+				  newValue = newValue.substring(0, newValue.length - 2);
+				  newValue += "))";
+				  field.value = newValue;
+			}
+			
+			function initialize() {
+				var mapOptions = {
+					center : new google.maps.LatLng(55.761123, 13.084717),
+					zoom : 5,
+					mapTypeId : google.maps.MapTypeId.SATELLITE
+				};
+				map = new google.maps.Map(
+						document.getElementById("map"), mapOptions);
+				
+				google.maps.event.addListener(map, 'click', function(event) {
+					addCoordinate(event.latLng);
+				});
+				
+				setArea(document.getElementById("areaCreate:coordinates"));
+			}
+			
+			google.maps.event.addDomListener(window, 'load', initialize);
+			
+			function setArea(field) {
+				if (field.value) {
+					coordinates = new Array();
+					area = null;
+					var regex = new RegExp(/([-0-9\.]+)\s+([-0-9\.]+)/g);
+					var matches;
+					var data = field.value;
+					while (matches = regex.exec(data)) {
+						addCoordinate(new google.maps.LatLng(Number(matches[1]), Number(matches[2])));
+					}
+				}
+			}
+		</script>
+	</h:head>
+	<h:body>
+		<h1>Areas</h1>
+		<h2>Create / Edit</h2>
+		<div>
+			<h:form id="areaCreate">
+				<h:panelGroup columns="2">
+					<h:outputLabel value="English Name" for="englishName" />
+					<h:inputText id="englishName" value="#{AreaCrud.englishName}" />
+					<h:outputLabel value="Aliases" for="aliases" />
+					<h:inputText id="aliases" value="#{AreaCrud.aliases}" />
+					<h:selectOneMenu value="#{AreaCrud.type}" converter="#{AreaTypeConverter}">
+   						<f:selectItems value="#{AreaTypeList.listTypes()}" var="type"
+   							itemLabel="#{type}" itemValue="#{type}" />
+   					</h:selectOneMenu>
+					<h:outputLabel value="Coordinates" for="coordinates" />
+					<h:inputText id="coordinates" value="#{AreaCrud.coordinates}" onchange="setArea(this);" />
+					<div id="map" />
+					<h:commandButton value="Create / Edit Area" action="#{AreaCrud.persist}" />
+				</h:panelGroup>
+			</h:form>
+		</div>
+		<h2>Search</h2>
+		<div>
+			<h:form id="areaSearch">
+				<h:panelGroup columns="2">
+					<h:outputLabel value="Full Name:" for="term" />
+					<h:inputText id="term" value="#{AreaSearch.term}" />
+					<h:commandButton value="Search Areas" action="#{AreaSearch.search}">
+						<f:ajax execute="@form" render="results" />
+					</h:commandButton>
+					<h:panelGroup id="results">
+						<h:dataTable value="#{AreaSearch.results}" var="area" rendered="#{not empty AreaSearch.results}">
+							<h:column>
+								<f:facet name="header">
+									<h:outputText value="English Name" />
+								</f:facet>
+								<h:outputText value="#{area.englishName}" />
+							</h:column>
+							<h:column>
+								<f:facet name="header">
+									<h:outputText value="Coordinates" />
+								</f:facet>
+								<h:outputText value="#{AreaCrud.getCoordinateString(area.geometry)}" />
+							</h:column>
+							<h:column>
+								<f:facet name="header">
+									<h:outputText value="Aliases" />
+								</f:facet>
+								<h:outputText value="#{AreaCrud.getAliasString(area)}" />
+							</h:column>
+							<h:column>
+								<f:facet name="header">
+									<h:outputText value="Type" />
+								</f:facet>
+								<h:outputText value="#{area.type}" />
+							</h:column>
+							<h:column>
+								<h:commandLink value="Edit" action="#{AreaCrud.edit(area)}" />
+							</h:column>
+							<h:column>
+								<h:commandLink value="Delete" action="#{AreaCrud.delete(area)}" />
+							</h:column>
+						</h:dataTable>
+					</h:panelGroup>
+				</h:panelGroup>
+			</h:form>
+		</div>
+	</h:body>
+</html>

@@ -26,9 +26,10 @@ import com.vividsolutions.jts.geom.Polygon;
  * @author Stephen Badger [stephen@port7.dk]
  */
 @Entity
-@NamedQueries(
-		@NamedQuery(name = "area-by-name", query = "SELECT c FROM AreaJPA c WHERE UPPER(c.englishName) = :englishName")
-		)
+@NamedQueries({
+		@NamedQuery(name = "area-by-name", query = "SELECT c FROM AreaJPA c WHERE UPPER(c.englishName) = :englishName"),
+		@NamedQuery(name = "area-search-by-name", query = "SELECT DISTINCT p FROM AreaAliasJPA a RIGHT JOIN a.area p WHERE UPPER(p.englishName) LIKE :term OR UPPER(a.name) LIKE :term")
+})
 public class AreaJPA extends AbstractEntityJPA {
 	@Column(nullable = false, unique = true)
 	private String  englishName;

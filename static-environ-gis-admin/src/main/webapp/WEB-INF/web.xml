@@ -30,7 +30,7 @@
 		<realm-name>static-environ-gis-realm</realm-name>
 		<form-login-config>
 			<form-login-page>/login.xhtml</form-login-page>
-			<form-error-page>/login.xhtml?error=true</form-error-page>
+			<form-error-page>/loginerror.xhtml</form-error-page>
 		</form-login-config>
 	</login-config>
 	

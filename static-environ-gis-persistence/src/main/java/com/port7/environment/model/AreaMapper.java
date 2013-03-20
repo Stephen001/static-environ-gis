@@ -18,6 +18,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
 import com.port7.environment.persistence.AreaJPA;
+import com.vividsolutions.jts.geom.Polygon;
 
 /**
  * Maps between {@link AreaJPA} JPA entities and {@link Area} DTOs.
@@ -51,8 +52,8 @@ public class AreaMapper implements AreaMapperLocal {
 	 */
 	@Override
 	public AreaJPA getByName(String englishName) {
-		TypedQuery<AreaJPA> query = manager.createNamedQuery("area-by-alias", AreaJPA.class);
-		query.setParameter("name", englishName.toUpperCase(Locale.ENGLISH));
+		TypedQuery<AreaJPA> query = manager.createNamedQuery("area-by-name", AreaJPA.class);
+		query.setParameter("englishName", englishName.toUpperCase(Locale.ENGLISH));
 		return query.getSingleResult();
 	}
 
@@ -63,5 +64,10 @@ public class AreaMapper implements AreaMapperLocal {
 	public List<String> getNamesAndAliases() {
 		TypedQuery<String> query = manager.createNamedQuery("all-area-aliases", String.class);
 		return new ArrayList<String>(query.getResultList());
+	}
+
+	@Override
+	public Area newArea(String englishName, Polygon read, AreaType type) {
+		return new AreaImpl(englishName, read, type);
 	}
 }

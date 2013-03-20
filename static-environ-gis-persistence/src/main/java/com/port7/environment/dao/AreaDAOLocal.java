@@ -1,5 +1,7 @@
 package com.port7.environment.dao;
 
+import java.util.List;
+
 import javax.ejb.Local;
 
 import com.port7.environment.model.Area;
@@ -14,4 +16,8 @@ public interface AreaDAOLocal {
 	public void updateMetadata(final String oldName, final Area area);
 
 	public void delete(final AreaJPA byName);
+
+	public List<AreaJPA> searchByNameOrAlias(String term);
+
+	public List<String> getAliases(AreaJPA mapFromDTO);
 }

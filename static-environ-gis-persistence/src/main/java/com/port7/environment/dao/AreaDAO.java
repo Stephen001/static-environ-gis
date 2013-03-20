@@ -1,7 +1,11 @@
 package com.port7.environment.dao;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
@@ -23,8 +27,9 @@ public class AreaDAO implements AreaDAOLocal {
 		TypedQuery<AreaAliasJPA> query = em.createNamedQuery("existing-alias-for-area", AreaAliasJPA.class);
 		query.setParameter("name", alias);
 		query.setParameter("area", area);
-		AreaAliasJPA result = query.getSingleResult();		
-		if (result == null) {
+		try {
+			query.getSingleResult();
+		} catch (NoResultException e) {
 			AreaAliasJPA aliasJPA = new AreaAliasJPA();
 			aliasJPA.setArea(area);
 			aliasJPA.setName(alias);
@@ -40,10 +45,10 @@ public class AreaDAO implements AreaDAOLocal {
 		TypedQuery<AreaAliasJPA> query = em.createNamedQuery("existing-alias-for-area", AreaAliasJPA.class);
 		query.setParameter("name", alias);
 		query.setParameter("area", area);
-		AreaAliasJPA result = query.getSingleResult();
-		if (result != null) {
+		try {
+			AreaAliasJPA result = query.getSingleResult();
 			em.remove(result);
-		}
+		} catch (NoResultException e) {}
 	}
 	
 	/* (non-Javadoc)
@@ -53,10 +58,20 @@ public class AreaDAO implements AreaDAOLocal {
 	public void updateMetadata(String oldName, Area area) {
 		TypedQuery<AreaJPA> query = em.createNamedQuery("area-by-name", AreaJPA.class);
 		query.setParameter("englishName", oldName);
-		AreaJPA c = query.getSingleResult();
+		AreaJPA c;
+		boolean needsPersist = false;
+		try {
+			c = query.getSingleResult();
+		} catch (NoResultException e) {
+			c = new AreaJPA();
+			needsPersist = true;
+		}
 		c.setLandMassShape(area.getGeometry());
 		c.setEnglishName(area.getEnglishName());
-		c.setType(em.find(AreaTypeJPA.class, area.getType()));
+		c.setType(em.find(AreaTypeJPA.class, area.getType().toString()));
+		if (needsPersist) {
+			em.persist(c);
+		}
 	}
 
 	@Override
@@ -67,5 +82,23 @@ public class AreaDAO implements AreaDAOLocal {
 			em.remove(alias);
 		}
 		em.remove(byName);
+	}
+
+	@Override
+	public List<AreaJPA> searchByNameOrAlias(String term) {
+		final TypedQuery<AreaJPA> query = em.createNamedQuery("area-search-by-name", AreaJPA.class);
+		query.setParameter("term", term + "%");
+		return query.getResultList();
+	}
+
+	@Override
+	public List<String> getAliases(AreaJPA area) {
+		TypedQuery<AreaAliasJPA> query = em.createNamedQuery("aliases-from-area", AreaAliasJPA.class);
+		query.setParameter("area", area);
+		List<String> results = new ArrayList<>();
+		for (AreaAliasJPA alias : query.getResultList()) {
+			results.add(alias.getName());
+		}
+		return results;
 	}
 }

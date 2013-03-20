@@ -57,20 +57,14 @@
 		<h2>Create / Edit</h2>
 		<div>
 			<h:form id="portCreate">
-				<h:panelGroup>
-					<div>
-						<h:outputLabel value="English Name" for="englishName" />
-						<h:inputText id="englishName" value="#{PortCrud.englishName}" />
-					</div>
-					<div>
-						<h:outputLabel value="Aliases" for="aliases" />
-						<h:inputText id="aliases" value="#{PortCrud.aliases}" />
-					</div>
-					<div>
-						<h:outputLabel value="Coordinate" for="coordinate" />
-						<h:inputText id="coordinate" value="#{PortCrud.coordinate}" onchange="setMarker(this);" />
-						<div id="map" />
-					</div>
+				<h:panelGroup columns="2">
+					<h:outputLabel value="English Name" for="englishName" />
+					<h:inputText id="englishName" value="#{PortCrud.englishName}" />
+					<h:outputLabel value="Aliases" for="aliases" />
+					<h:inputText id="aliases" value="#{PortCrud.aliases}" />
+					<h:outputLabel value="Coordinate" for="coordinate" />
+					<h:inputText id="coordinate" value="#{PortCrud.coordinate}" onchange="setMarker(this);" />
+					<div id="map" />
 					<h:commandButton value="Create / Edit Port" action="#{PortCrud.persist}" />
 				</h:panelGroup>
 			</h:form>
@@ -78,7 +72,7 @@
 		<h2>Search</h2>
 		<div>
 			<h:form id="portSearch">
-				<h:panelGroup>
+				<h:panelGroup columns="2">
 					<h:outputLabel value="Full Name:" for="term" />
 					<h:inputText id="term" value="#{PortSearch.term}" />
 					<h:commandButton value="Search Ports" action="#{PortSearch.search}">

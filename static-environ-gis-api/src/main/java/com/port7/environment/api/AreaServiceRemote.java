@@ -77,4 +77,9 @@ public interface AreaServiceRemote {
 	 * @param area The area to delete.
 	 */
 	public void deleteArea(final Area area);
+	
+	public List<Area> searchAreaByNameOrAlias(final String term);
+
+	
+	public List<String> getAliases(Area area);
 }

@@ -13,6 +13,7 @@ import java.util.List;
 import javax.ejb.Local;
 
 import com.port7.environment.persistence.AreaJPA;
+import com.vividsolutions.jts.geom.Polygon;
 
 /**
  * Maps between {@link AreaJPA} and {@link Area}.
@@ -52,4 +53,6 @@ public interface AreaMapperLocal {
 	 * @return All area names and aliases.
 	 */
 	public List<String> getNamesAndAliases();
+
+	public Area newArea(String englishName, Polygon read, AreaType type);
 }

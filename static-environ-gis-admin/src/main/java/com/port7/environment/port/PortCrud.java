@@ -89,6 +89,7 @@ public class PortCrud {
 		service.deletePort(port);
 		englishName = null;
 		coordinate = null;
+		aliases = null;
 		PortSearch search = getSearchBean();
 		if (search.getResults() != null) {
 			search.getResults().remove(port);

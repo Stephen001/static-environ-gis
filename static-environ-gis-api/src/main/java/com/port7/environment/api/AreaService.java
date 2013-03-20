@@ -8,6 +8,7 @@
  */
 package com.port7.environment.api;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -97,5 +98,19 @@ public class AreaService implements AreaServiceRemote {
 	@Override
 	public void deleteArea(final Area area) {
 		areaDAO.delete(areaMapper.getByName(area.getEnglishName()));
+	}
+
+	@Override
+	public List<Area> searchAreaByNameOrAlias(String term) {
+		List<Area> results = new ArrayList<Area>();
+		for (AreaJPA port : areaDAO.searchByNameOrAlias(term)) {
+			results.add(areaMapper.mapToDTO(port));
+		}
+		return results;
+	}
+
+	@Override
+	public List<String> getAliases(Area area) {
+		return areaDAO.getAliases(areaMapper.mapFromDTO(area));
 	}
 }
