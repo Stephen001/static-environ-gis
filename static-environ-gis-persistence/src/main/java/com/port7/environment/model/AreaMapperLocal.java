@@ -12,15 +12,15 @@ import java.util.List;
 
 import javax.ejb.Local;
 
-import com.port7.environment.persistence.CountryJPA;
+import com.port7.environment.persistence.AreaJPA;
 
 /**
- * Maps between {@link CountryJPA} and {@link Country}.
+ * Maps between {@link AreaJPA} and {@link Area}.
  * 
  * @author Stephen Badger [stephen@port7.dk]
  */
 @Local
-public interface CountryMapperLocal {
+public interface AreaMapperLocal {
 
 	/**
 	 * Maps to DTO.
@@ -28,28 +28,28 @@ public interface CountryMapperLocal {
 	 * @param c The JPA entity.
 	 * @return The DTO.
 	 */
-	public Country mapToDTO(final CountryJPA c);
+	public Area mapToDTO(final AreaJPA c);
 
 	/**
 	 * Maps from DTO.
 	 * 
-	 * @param country The DTO.
+	 * @param area The DTO.
 	 * @return The JPA entity.
 	 */
-	public CountryJPA mapFromDTO(final Country country);
+	public AreaJPA mapFromDTO(final Area area);
 	
 	/**
-	 * Gets a Country by it's name.
+	 * Gets an Area by it's name.
 	 * 
-	 * @param englishName The name of the country.
+	 * @param englishName The name of the area.
 	 * @return The entity.
 	 */
-	public CountryJPA getByName(final String englishName);
+	public AreaJPA getByName(final String englishName);
 	
 	/**
-	 * Gets all country names and aliases.
+	 * Gets all area names and aliases.
 	 * 
-	 * @return All country names and aliases.
+	 * @return All area names and aliases.
 	 */
 	public List<String> getNamesAndAliases();
 }

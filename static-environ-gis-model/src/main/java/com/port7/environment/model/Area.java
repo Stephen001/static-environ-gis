@@ -13,7 +13,7 @@ import java.io.Serializable;
 import com.vividsolutions.jts.geom.Polygon;
 
 /**
- * A geographical representation of a area on the globe. Areas are very general, and typically do not encompass
+ * A geographical representation of an area on the globe. Areas are very general, and typically do not encompass
  * internationally defined standards.
  * 
  * @author Stephen Badger [stephen@port7.dk]
@@ -32,4 +32,11 @@ public interface Area extends Location, Serializable {
 	 * @return The polygon representing this Area.
 	 */
 	public Polygon getGeometry();
+	
+	/**
+	 * Gets the area type associated with this area.
+	 * 
+	 * @return The type of area this is.
+	 */
+	public AreaType getType();
 }

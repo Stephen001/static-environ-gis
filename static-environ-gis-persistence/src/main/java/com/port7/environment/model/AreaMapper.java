@@ -17,54 +17,51 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
-import com.port7.environment.persistence.CountryJPA;
+import com.port7.environment.persistence.AreaJPA;
 
 /**
- * Maps between {@link CountryJPA} JPA entities and {@link Country} DTOs.
+ * Maps between {@link AreaJPA} JPA entities and {@link Area} DTOs.
  * 
  * @author Stephen Badger [stephen@port7.dk]
  */
 @Stateless
-public class CountryMapper implements CountryMapperLocal {
+public class AreaMapper implements AreaMapperLocal {
 	@PersistenceContext(unitName = "static-environ-gis")
 	private EntityManager manager;
 	
 	/* (non-Javadoc)
-	 * @see com.port7.environment.model.CountryMapperLocal#mapToDTO(com.port7.environment.persistence.Country)
+	 * @see com.port7.environment.model.AreaMapperLocal#mapToDTO(com.port7.environment.persistence.Area)
 	 */
 	@Override
-	public Country mapToDTO(final CountryJPA c) {
-		CountryImpl dto = new CountryImpl(c.getEnglishName(), 
-										  c.getTwoCountryCode(),
-										  c.getThreeCountryCode(),
-										  c.getLandMassShape());
+	public Area mapToDTO(final AreaJPA c) {
+		AreaImpl dto = new AreaImpl(c.getEnglishName(),c.getLandMassShape(), new AreaType(c.getType().getName()));
 		return dto;
 	}
 	
 	/* (non-Javadoc)
-	 * @see com.port7.environment.model.CountryMapperLocal#mapFromDTO(com.port7.environment.model.Country)
+	 * @see com.port7.environment.model.AreaMapperLocal#mapFromDTO(com.port7.environment.model.Area)
 	 */
 	@Override
-	public CountryJPA mapFromDTO(Country country) {
-		return getByName(country.getEnglishName());
+	public AreaJPA mapFromDTO(Area area) {
+		return getByName(area.getEnglishName());
 	}
 
 	/* (non-Javadoc)
-	 * @see com.port7.environment.model.CountryMapperLocal#getByName(java.lang.String)
+	 * @see com.port7.environment.model.AreaMapperLocal#getByName(java.lang.String)
 	 */
 	@Override
-	public CountryJPA getByName(String englishName) {
-		TypedQuery<CountryJPA> query = manager.createNamedQuery("country-by-alias", CountryJPA.class);
+	public AreaJPA getByName(String englishName) {
+		TypedQuery<AreaJPA> query = manager.createNamedQuery("area-by-alias", AreaJPA.class);
 		query.setParameter("name", englishName.toUpperCase(Locale.ENGLISH));
 		return query.getSingleResult();
 	}
 
 	/* (non-Javadoc)
-	 * @see com.port7.environment.model.CountryMapperLocal#getNamesAndAliases()
+	 * @see com.port7.environment.model.AreaMapperLocal#getNamesAndAliases()
 	 */
 	@Override
 	public List<String> getNamesAndAliases() {
-		TypedQuery<String> query = manager.createNamedQuery("all-country-aliases", String.class);
+		TypedQuery<String> query = manager.createNamedQuery("all-area-aliases", String.class);
 		return new ArrayList<String>(query.getResultList());
 	}
 }

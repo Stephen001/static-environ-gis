@@ -16,20 +16,23 @@ import com.vividsolutions.jts.geom.Polygon;
  * 
  * @author Stephen Badger [stephen@port7.dk]
  */
-public class AreaImpl implements Area {
+public final  class AreaImpl implements Area {
 	private static final long serialVersionUID = 3250883859948824868L;
 	private final Polygon shape;
 	private final String englishName;
+	private final AreaType type;
 
 	/**
 	 * Constructs an Area with the provided parameters.
 	 * 
 	 * @param englishName English country name for this area.
 	 * @param location The shape of the area, in global coordinates.
+	 * @param type The type of area this is.
 	 */
-	public AreaImpl(final String englishName, final Polygon shape) {
+	public AreaImpl(final String englishName, final Polygon shape, final AreaType type) {
 		this.englishName 	= englishName;
 		this.shape 			= shape;
+		this.type 			= type;
 	}
 	
 	/* (non-Javadoc)
@@ -46,5 +49,13 @@ public class AreaImpl implements Area {
 	@Override
 	public final String getEnglishName() {
 		return englishName;
+	}
+
+	/* (non-Javadoc)
+	 * @see com.port7.environment.model.Area#getType()
+	 */
+	@Override
+	public AreaType getType() {
+		return type;
 	}
 }
