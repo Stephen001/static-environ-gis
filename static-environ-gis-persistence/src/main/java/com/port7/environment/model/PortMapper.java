@@ -18,6 +18,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
 import com.port7.environment.persistence.PortJPA;
+import com.vividsolutions.jts.geom.Point;
 
 /**
  * Maps between {@link PortJPA} JPA entities and {@link Port} DTOs.
@@ -64,5 +65,13 @@ public class PortMapper implements PortMapperLocal {
 	public List<String> getNamesAndAliases() {
 		TypedQuery<String> query = manager.createNamedQuery("all-port-aliases", String.class);
 		return new ArrayList<String>(query.getResultList());
+	}
+
+	/* (non-Javadoc)
+	 * @see com.port7.environment.model.PortMapperLocal#newPort(java.lang.String, com.vividsolutions.jts.geom.Point)
+	 */
+	@Override
+	public Port newPort(String englishName, Point point) {
+		return new PortImpl(englishName, point);
 	}
 }

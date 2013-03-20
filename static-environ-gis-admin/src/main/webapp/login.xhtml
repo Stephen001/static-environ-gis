@@ -4,12 +4,21 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core"  xmlns:h="http://java.sun.com/jsf/html">
 	<h:head>
 		<title>Static Environment GIS :: Administration :: Login</title>
+		<link rel="stylesheet" type="text/css" href="default.css" />
 	</h:head>
 	<h:body>
-		<form method="post" action="j_security_check">
-			<input type="text" name="j_username" />
-			<input type="password" name="j_password" />
-			<input type="submit" name="Login" value="Login" />
-		</form>
+		<div>
+			<form method="post" action="j_security_check">
+				<div>
+					<label for="j_username">Username:</label>
+					<input type="text" name="j_username" />
+				</div>
+				<div>
+					<label for="j_password">Password:</label>
+					<input type="password" name="j_password" />
+				</div>
+				<input type="submit" name="Login" value="Login" />
+			</form>
+		</div>
 	</h:body>
 </html>

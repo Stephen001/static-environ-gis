@@ -12,7 +12,6 @@ import java.util.List;
 
 import javax.ejb.Remote;
 
-import com.port7.environment.model.Country;
 import com.port7.environment.model.Port;
 
 /**

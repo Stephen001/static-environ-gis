@@ -13,6 +13,7 @@ import java.util.List;
 import javax.ejb.Local;
 
 import com.port7.environment.persistence.PortJPA;
+import com.vividsolutions.jts.geom.Point;
 
 /**
  * Maps between {@link PortJPA} and {@link Port}.
@@ -52,4 +53,13 @@ public interface PortMapperLocal {
 	 * @return All port names and aliases.
 	 */
 	public List<String> getNamesAndAliases();
+	
+	/**
+	 * Creates a new serialisable port.
+	 * 
+	 * @param englishName The name of the port.
+	 * @param point The position on the globe where the port is.
+	 * @return A new serialisable port.
+	 */
+	public Port newPort(String englishName, Point point);
 }

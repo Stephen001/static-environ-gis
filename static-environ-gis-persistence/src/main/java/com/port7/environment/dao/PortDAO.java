@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
@@ -61,9 +62,19 @@ public class PortDAO implements PortDAOLocal {
 	public void updateMetadata(String oldName, Port port) {
 		TypedQuery<PortJPA> query = em.createNamedQuery("port-by-name", PortJPA.class);
 		query.setParameter("englishName", oldName);
-		PortJPA c = query.getSingleResult();
+		PortJPA c;
+		boolean needsPersist = false;
+		try {
+			c = query.getSingleResult();
+		} catch (NoResultException e) {
+			c = new PortJPA();
+			needsPersist = true;
+		}
 		c.setLocation(port.getLocation());
 		c.setEnglishName(port.getEnglishName());
+		if (needsPersist) {
+			em.persist(c);
+		}
 	}
 
 	@Override

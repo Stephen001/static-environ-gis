@@ -15,7 +15,7 @@ import com.vividsolutions.jts.geom.Polygon;
  * 
  * @author Stephen Badger [stephen@port7.dk]
  */
-final class CountryImpl implements Country {
+public final class CountryImpl implements Country {
 	private static final long serialVersionUID = -2710918101788553618L;
 	private final String  englishName;
 	private final String  twoCharCountryCode;
@@ -30,7 +30,7 @@ final class CountryImpl implements Country {
 	 * @param threeCharCountryCode Three character country code for this country, as defined by ISO 3166-1 alpha-3.
 	 * @param landMassShape The polygon that represents this Country's land mass.
 	 */
-	CountryImpl(final String englishName,
+	public CountryImpl(final String englishName,
 				final String twoCharCountryCode,
 				final String threeCharCountryCode,
 				final Polygon landMassShape) {

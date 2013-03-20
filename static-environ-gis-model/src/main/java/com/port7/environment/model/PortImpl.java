@@ -15,7 +15,7 @@ import com.vividsolutions.jts.geom.Point;
  * 
  * @author Stephen Badger [stephen@port7.dk]
  */
-final class PortImpl implements Port {
+public final class PortImpl implements Port {
 	private static final long serialVersionUID = -4920071550270946372L;
 	private final String englishName;
 	private final Point  location;
@@ -26,7 +26,7 @@ final class PortImpl implements Port {
 	 * @param englishName English country name for this port.
 	 * @param location The location of the port on the globe.
 	 */
-	PortImpl(final String englishName, final Point location) {
+	public PortImpl(final String englishName, final Point location) {
 		this.englishName = englishName;
 		this.location	 = location;
 	}

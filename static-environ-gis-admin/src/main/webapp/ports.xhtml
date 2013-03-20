@@ -24,5 +24,17 @@
 				</h:panelGroup>
 			</h:form>
 		</div>
+		<h2>Create</h2>
+		<div>
+			<h:form id="portCreate">
+				<h:panelGroup>
+					<h:outputLabel value="English Name" for="englishName" />
+					<h:inputText id="englishName" value="#{PortCrud.englishName}" />
+					<h:outputLabel value="Coordinate" for="coordinate" />
+					<h:inputText id="coordinate" value="#{PortCrud.coordinate}" />
+					<h:commandButton value="Create Port" action="#{PortCrud.persist}" />
+				</h:panelGroup>
+			</h:form>
+		</div>
 	</h:body>
 </html>

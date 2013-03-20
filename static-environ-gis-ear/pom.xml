@@ -52,7 +52,7 @@
 						<webModule>
 							<groupId>com.port7.component</groupId>
 							<artifactId>static-environ-gis-admin</artifactId>
-							<contextRoot>/admin</contextRoot>
+							<contextRoot>/static-environ-gis/admin</contextRoot>
 						</webModule>
 					</modules>
 				</configuration>
