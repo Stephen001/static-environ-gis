@@ -53,8 +53,8 @@ public class PortMapper implements PortMapperLocal {
 	 */
 	@Override
 	public PortJPA getByName(String englishName) {
-		TypedQuery<PortJPA> query = manager.createNamedQuery("port-by-alias", PortJPA.class);
-		query.setParameter("name", englishName.toUpperCase(Locale.ENGLISH));
+		TypedQuery<PortJPA> query = manager.createNamedQuery("port-by-name", PortJPA.class);
+		query.setParameter("englishName", englishName.toUpperCase(Locale.ENGLISH));
 		return query.getSingleResult();
 	}
 	

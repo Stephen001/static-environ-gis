@@ -18,4 +18,6 @@ public interface PortDAOLocal {
 	public void updateMetadata(final String oldName, final Port port);
 
 	public void delete(final PortJPA byName);
+	
+	public List<String> getAliases(final PortJPA port);
 }

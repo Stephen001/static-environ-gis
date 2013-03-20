@@ -1,5 +1,6 @@
 package com.port7.environment.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.Stateless;
@@ -32,8 +33,9 @@ public class PortDAO implements PortDAOLocal {
 		TypedQuery<PortAliasJPA> query = em.createNamedQuery("existing-alias-for-port", PortAliasJPA.class);
 		query.setParameter("name", alias);
 		query.setParameter("port", port);
-		PortAliasJPA result = query.getSingleResult();		
-		if (result == null) {
+		try {
+			query.getSingleResult();
+		} catch (NoResultException e) {
 			PortAliasJPA aliasJPA = new PortAliasJPA();
 			aliasJPA.setPort(port);
 			aliasJPA.setName(alias);
@@ -49,10 +51,10 @@ public class PortDAO implements PortDAOLocal {
 		TypedQuery<PortAliasJPA> query = em.createNamedQuery("existing-alias-for-port", PortAliasJPA.class);
 		query.setParameter("name", alias);
 		query.setParameter("port", port);
-		PortAliasJPA result = query.getSingleResult();
-		if (result != null) {
+		try {
+			PortAliasJPA result = query.getSingleResult();
 			em.remove(result);
-		}
+		} catch (NoResultException e) {}
 	}
 	
 	/* (non-Javadoc)
@@ -81,9 +83,22 @@ public class PortDAO implements PortDAOLocal {
 	public void delete(PortJPA byName) {
 		TypedQuery<PortAliasJPA> query = em.createNamedQuery("aliases-from-port", PortAliasJPA.class);
 		query.setParameter("port", byName);
-		for (PortAliasJPA alias : query.getResultList()) {
-			em.remove(alias);
-		}
+		try {
+			for (PortAliasJPA alias : query.getResultList()) {
+				em.remove(alias);
+			}
+		} catch (NoResultException e) {}
 		em.remove(byName);
+	}
+
+	@Override
+	public List<String> getAliases(PortJPA port) {
+		TypedQuery<PortAliasJPA> query = em.createNamedQuery("aliases-from-port", PortAliasJPA.class);
+		query.setParameter("port", port);
+		List<String> results = new ArrayList<>();
+		for (PortAliasJPA alias : query.getResultList()) {
+			results.add(alias.getName());
+		}
+		return results;
 	}
 }

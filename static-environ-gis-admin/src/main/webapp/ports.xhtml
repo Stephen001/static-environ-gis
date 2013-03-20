@@ -4,15 +4,29 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core"  xmlns:h="http://java.sun.com/jsf/html">
 	<h:head>
 		<title>Static Environment GIS :: Administration :: Ports</title>
-		<link rel="stylesheet" type="text/css" href="default.css" />
+		<link rel="stylesheet" type="text/css" href="css/default.css" />
 	</h:head>
 	<h:body>
 		<h1>Ports</h1>
+		<h2>Create / Edit</h2>
+		<div>
+			<h:form id="portCreate">
+				<h:panelGroup>
+					<h:outputLabel value="English Name" for="englishName" />
+					<h:inputText id="englishName" value="#{PortCrud.englishName}" />
+					<h:outputLabel value="Coordinate" for="coordinate" />
+					<h:inputText id="coordinate" value="#{PortCrud.coordinate}" />
+					<h:outputLabel value="Aliases" for="aliases" />
+					<h:inputText id="aliases" value="#{PortCrud.aliases}" />
+					<h:commandButton value="Create / Edit Port" action="#{PortCrud.persist}" />
+				</h:panelGroup>
+			</h:form>
+		</div>
 		<h2>Search</h2>
 		<div>
 			<h:form id="portSearch">
 				<h:panelGroup>
-					<h:outputLabel value="Full Name:" for="fullName" />
+					<h:outputLabel value="Full Name:" for="term" />
 					<h:inputText id="term" value="#{PortSearch.term}" />
 					<h:commandButton value="Search Ports" action="#{PortSearch.search}">
 						<f:ajax execute="@form" render="results" />
@@ -25,20 +39,26 @@
 								</f:facet>
 								<h:outputText value="#{port.englishName}" />
 							</h:column>
+							<h:column>
+								<f:facet name="header">
+									<h:outputText value="Coordinates" />
+								</f:facet>
+								<h:outputText value="#{PortCrud.getCoordinateString(port.location)}" />
+							</h:column>
+							<h:column>
+								<f:facet name="header">
+									<h:outputText value="Aliases" />
+								</f:facet>
+								<h:outputText value="#{PortCrud.getAliasString(port)}" />
+							</h:column>
+							<h:column>
+								<h:commandLink value="Edit" action="#{PortCrud.edit(port)}" />
+							</h:column>
+							<h:column>
+								<h:commandLink value="Delete" action="#{PortCrud.delete(port)}" />
+							</h:column>
 						</h:dataTable>
 					</h:panelGroup>
-				</h:panelGroup>
-			</h:form>
-		</div>
-		<h2>Create</h2>
-		<div>
-			<h:form id="portCreate">
-				<h:panelGroup>
-					<h:outputLabel value="English Name" for="englishName" />
-					<h:inputText id="englishName" value="#{PortCrud.englishName}" />
-					<h:outputLabel value="Coordinate" for="coordinate" />
-					<h:inputText id="coordinate" value="#{PortCrud.coordinate}" />
-					<h:commandButton value="Create Port" action="#{PortCrud.persist}" />
 				</h:panelGroup>
 			</h:form>
 		</div>

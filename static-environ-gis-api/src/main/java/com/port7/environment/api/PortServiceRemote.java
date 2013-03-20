@@ -76,4 +76,12 @@ public interface PortServiceRemote {
 	 * @param port The port to delete.
 	 */
 	public void deletePort(final Port port);
+	
+	/**
+	 * Gets the list of aliases associated with the given port.
+	 * 
+	 * @param port The port to fetch aliases for.
+	 * @return The list of aliases for this port.
+	 */
+	public List<String> getAliases(Port port);
 }

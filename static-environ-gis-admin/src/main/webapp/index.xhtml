@@ -4,8 +4,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core"  xmlns:h="http://java.sun.com/jsf/html">
 	<h:head>
 		<title>Static Environment GIS :: Administration</title>
+		<link rel="stylesheet" type="text/css" href="css/default.css" />
 	</h:head>
 	<h:body>
-		<h:outputText value="#{user.getName()}" />
+		Welcome <h:outputText value="#{user.getName()}" />!<br />
+		<ul>
+			<li><a href="ports.xhtml">Port Management</a></li>
+		</ul>
 	</h:body>
 </html>

@@ -62,7 +62,7 @@ public class PortService implements PortServiceRemote {
 	 */
 	@Override
 	public void addAlias(String alias, Port port) {
-		PortJPA portJPA = mapper.getByName(port.getEnglishName());
+		PortJPA portJPA = mapper.mapFromDTO(port);
 		if (portJPA != null) {
 			dao.addAlias(alias, portJPA);
 		}
@@ -73,7 +73,7 @@ public class PortService implements PortServiceRemote {
 	 */
 	@Override
 	public void removeAlias(String alias, Port port) {
-		PortJPA portJPA = mapper.getByName(port.getEnglishName());
+		PortJPA portJPA = mapper.mapFromDTO(port);
 		if (portJPA != null) {
 			dao.removeAlias(alias, portJPA);
 		}
@@ -92,6 +92,14 @@ public class PortService implements PortServiceRemote {
 	 */
 	@Override
 	public void deletePort(final Port port) {
-		dao.delete(mapper.getByName(port.getEnglishName()));
+		dao.delete(mapper.mapFromDTO(port));
+	}
+
+	/* (non-Javadoc)
+	 * @see com.port7.environment.api.PortServiceRemote#getAliases(com.port7.environment.model.Port)
+	 */
+	@Override
+	public List<String> getAliases(Port port) {
+		return dao.getAliases(mapper.mapFromDTO(port));
 	}
 }

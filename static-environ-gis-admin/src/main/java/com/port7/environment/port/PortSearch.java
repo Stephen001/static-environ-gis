@@ -5,13 +5,13 @@ import java.util.List;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 
 import com.port7.environment.api.PortServiceRemote;
 import com.port7.environment.model.Port;
 
 @ManagedBean(name = "PortSearch")
-@RequestScoped
+@SessionScoped
 public class PortSearch {
 	private String term;
 	private List<Port> results = new ArrayList<>();
@@ -20,7 +20,7 @@ public class PortSearch {
 	private PortServiceRemote service;
 	
 	public void search() {
-		setResults(service.searchPortByNameOrAlias(term == null ? "" : term));
+		results = service.searchPortByNameOrAlias(term == null ? "" : term);
 	}
 
 	public String getTerm() {
@@ -33,9 +33,5 @@ public class PortSearch {
 
 	public List<Port> getResults() {
 		return results;
-	}
-
-	public void setResults(List<Port> results) {
-		this.results = results;
 	}
 }
