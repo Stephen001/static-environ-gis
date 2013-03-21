@@ -5,38 +5,11 @@
 		<title>Static Environment GIS :: Administration :: Areas</title>
 		<link rel="stylesheet" type="text/css" href="css/standard.css" />
 		<script type="text/javascript"
-		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBQVcskY0Eb6qqr6G32oVc-4knZQsJicj0&amp;sensor=false">
+		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBQVcskY0Eb6qqr6G32oVc-4knZQsJicj0&amp;sensor=false&amp;libraries=drawing">
 		</script>
 		<script type="text/javascript">	
 			var map;
 			var area;
-			var coordinates = new Array();
-		
-			function addCoordinate(location) {
-				 coordinates.push(location);
-				 if (!area) {
-					  area = new google.maps.Polygon({
-					      paths: coordinates,
-					      map: map,
-					      strokeColor: "#FF8080",
-					      strokeOpacity: 0.8,
-					      strokeWeight: 2,
-					      fillColor: "#FF8080",
-					      fillOpacity: 0.35
-					  });
-				  } else {
-					  area.setPath(coordinates);
-				  }
-				  var field = document.getElementById("areaCreate:coordinates");
-				  var newValue = "POLYGON ((";
-				  for (var i = 0; i &lt; coordinates.length; i++) {
-					  newValue += coordinates[i].lat() + " " + coordinates[i].lng() + ", ";
-				  }
-				  newValue += coordinates[0].lat() + " " + coordinates[0].lng() + ", ";
-				  newValue = newValue.substring(0, newValue.length - 2);
-				  newValue += "))";
-				  field.value = newValue;
-			}
 			
 			function initialize() {
 				var mapOptions = {
@@ -52,21 +25,91 @@
 				});
 				
 				setArea(document.getElementById("areaCreate:coordinates"));
+				
+				var drawingManager = new google.maps.drawing.DrawingManager({
+					  drawingMode: google.maps.drawing.OverlayType.POLYGON,
+					  drawingControl: true,
+					  drawingControlOptions: {
+					    position: google.maps.ControlPosition.TOP_CENTER,
+					    drawingModes: [
+					      google.maps.drawing.OverlayType.POLYGON
+					    ]
+					  },
+					  markerOptions: {
+					    icon: 'http://www.example.com/icon.png'
+					  },
+					  polygonOptions: {
+						strokeColor: "#FF8080",
+					    strokeOpacity: 0.8,
+					    strokeWeight: 2,
+					    fillColor: "#FF8080",
+					    fillOpacity: 0.35,
+					    clickable: true,
+					    zIndex: 1,
+					    editable: true
+					  }
+					});
+				
+				drawingManager.setMap(map);
+				
+				google.maps.event.addListener(drawingManager, 'polygoncomplete', setPolygon);
 			}
 			
 			google.maps.event.addDomListener(window, 'load', initialize);
 			
+			function updatePolygon() {
+				updateField();
+			}
+			
+			function setPolygon(polygon) {
+				  if (area) {
+					  area.setMap(null);
+				  }
+				  area = polygon;
+				  var path = area.getPath();
+				  google.maps.event.addListener(path, 'set_at', updatePolygon);
+				  google.maps.event.addListener(path, 'insert_at', updatePolygon);
+				  google.maps.event.addListener(path, 'remove_at', updatePolygon);
+				  updateField();
+			}
+			
 			function setArea(field) {
 				if (field.value) {
-					coordinates = new Array();
-					area = null;
+					var coordinates = new Array();
 					var regex = new RegExp(/([-0-9\.]+)\s+([-0-9\.]+)/g);
 					var matches;
 					var data = field.value;
+					var coordinates = new Array();
 					while (matches = regex.exec(data)) {
-						addCoordinate(new google.maps.LatLng(Number(matches[1]), Number(matches[2])));
+						coordinates.push(new google.maps.LatLng(Number(matches[1]), Number(matches[2])));
 					}
+					var newArea = new google.maps.Polygon({
+					      paths: coordinates,
+					      map: map,
+					      strokeColor: "#FF8080",
+					      strokeOpacity: 0.8,
+					      strokeWeight: 2,
+					      fillColor: "#FF8080",
+					      fillOpacity: 0.35,
+					      clickable: true,
+					      zIndex: 1,
+						  editable: true
+					  });
+					setPolygon(newArea);
+					map.setCenter(newArea.getPath().getArray()[0]);
 				}
+			}
+			
+			function updateField() {
+				  var field = document.getElementById("areaCreate:coordinates");
+				  var newValue = "POLYGON ((";
+				  for (var i = 0; i &lt; area.getPath().getArray().length; i++) {
+					  newValue += area.getPath().getArray()[i].lat() + " " + area.getPath().getArray()[i].lng() + ", ";
+				  }
+				  newValue += area.getPath().getArray()[0].lat() + " " + area.getPath().getArray()[0].lng() + ", ";
+				  newValue = newValue.substring(0, newValue.length - 2);
+				  newValue += "))";
+				  field.value = newValue;
 			}
 		</script>
 	</h:head>
