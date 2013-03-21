@@ -9,6 +9,8 @@
 package com.port7.environment.model;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import javax.ejb.Local;
 
@@ -62,4 +64,12 @@ public interface PortMapperLocal {
 	 * @return A new serialisable port.
 	 */
 	public Port newPort(String englishName, Point point);
+
+	/**
+	 * Gets the full set of ports, with their associated aliases. Please note this is
+	 * potentially a very large data set and so may be very memory-intensive.
+	 * 
+	 * @return The full set of ports, with their aliases.
+	 */
+	public Map<Port, Set<String>> getPortsAndAliases();
 }

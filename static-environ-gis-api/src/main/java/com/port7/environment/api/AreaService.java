@@ -10,6 +10,8 @@ package com.port7.environment.api;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -100,6 +102,9 @@ public class AreaService implements AreaServiceRemote {
 		areaDAO.delete(areaMapper.getByName(area.getEnglishName()));
 	}
 
+	/* (non-Javadoc)
+	 * @see com.port7.environment.api.AreaServiceRemote#searchAreaByNameOrAlias(java.lang.String)
+	 */
 	@Override
 	public List<Area> searchAreaByNameOrAlias(String term) {
 		List<Area> results = new ArrayList<Area>();
@@ -109,8 +114,19 @@ public class AreaService implements AreaServiceRemote {
 		return results;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.port7.environment.api.AreaServiceRemote#getAliases(com.port7.environment.model.Area)
+	 */
 	@Override
 	public List<String> getAliases(Area area) {
 		return areaDAO.getAliases(areaMapper.mapFromDTO(area));
+	}
+
+	/* (non-Javadoc)
+	 * @see com.port7.environment.api.AreaServiceRemote#getAreasAndAliases()
+	 */
+	@Override
+	public Map<Area, Set<String>> getAreasAndAliases() {
+		return areaMapper.getAreasAndAliases();
 	}
 }

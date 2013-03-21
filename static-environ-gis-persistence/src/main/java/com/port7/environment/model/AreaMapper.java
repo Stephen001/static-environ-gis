@@ -9,8 +9,12 @@
 package com.port7.environment.model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
+import java.util.Set;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -66,8 +70,27 @@ public class AreaMapper implements AreaMapperLocal {
 		return new ArrayList<String>(query.getResultList());
 	}
 
+	/* (non-Javadoc)
+	 * @see com.port7.environment.model.AreaMapperLocal#newArea(java.lang.String, com.vividsolutions.jts.geom.Polygon, com.port7.environment.model.AreaType)
+	 */
 	@Override
 	public Area newArea(String englishName, Polygon read, AreaType type) {
 		return new AreaImpl(englishName, read, type);
+	}
+
+	/* (non-Javadoc)
+	 * @see com.port7.environment.model.AreaMapperLocal#getAreasAndAliases()
+	 */
+	@Override
+	public Map<Area, Set<String>> getAreasAndAliases() {
+		Map<Area, Set<String>> results = new HashMap<>();
+		TypedQuery<AreaJPA> areaQuery = manager.createNamedQuery("all-areas", AreaJPA.class);
+		TypedQuery<String> aliasesQuery = manager.createNamedQuery("area-aliases", String.class);
+		for (AreaJPA a : areaQuery.getResultList()) {
+			aliasesQuery.setParameter("area", a);
+			Set<String> aliases = new HashSet<>(aliasesQuery.getResultList());
+			results.put(mapToDTO(a), aliases);
+		}
+		return results;
 	}
 }

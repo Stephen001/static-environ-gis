@@ -10,6 +10,8 @@ package com.port7.environment.api;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -101,5 +103,13 @@ public class PortService implements PortServiceRemote {
 	@Override
 	public List<String> getAliases(Port port) {
 		return dao.getAliases(mapper.mapFromDTO(port));
+	}
+
+	/* (non-Javadoc)
+	 * @see com.port7.environment.api.PortServiceRemote#getPortsAndAliases()
+	 */
+	@Override
+	public Map<Port, Set<String>> getPortsAndAliases() {
+		return mapper.getPortsAndAliases();
 	}
 }

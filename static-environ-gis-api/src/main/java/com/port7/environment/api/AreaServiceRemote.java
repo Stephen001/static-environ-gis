@@ -9,6 +9,8 @@
 package com.port7.environment.api;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import javax.ejb.Remote;
 
@@ -44,6 +46,14 @@ public interface AreaServiceRemote {
 	 * @return All area names and aliases.
 	 */
 	public List<String> getAreaNamesAndAliases();
+	
+	/**
+	 * Gets all areas and their aliases. Please note, this result set is likely to be very
+	 * large, and potentially consume a lot of memory.
+	 * 
+	 * @return A map of areas to aliases.
+	 */
+	public Map<Area, Set<String>> getAreasAndAliases(); 
 	
 	/**
 	 * Adds an alias to the specified area.

@@ -9,8 +9,12 @@
 package com.port7.environment.model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
+import java.util.Set;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -73,5 +77,21 @@ public class PortMapper implements PortMapperLocal {
 	@Override
 	public Port newPort(String englishName, Point point) {
 		return new PortImpl(englishName, point);
+	}
+
+	/* (non-Javadoc)
+	 * @see com.port7.environment.model.PortMapperLocal#getPortsAndAliases()
+	 */
+	@Override
+	public Map<Port, Set<String>> getPortsAndAliases() {
+		Map<Port, Set<String>> results = new HashMap<Port, Set<String>>();
+		TypedQuery<PortJPA> query = manager.createNamedQuery("all-ports", PortJPA.class);
+		TypedQuery<String> aliasesQuery = manager.createNamedQuery("port-aliases", String.class);
+		for (PortJPA port : query.getResultList()) {
+			aliasesQuery.setParameter("port", port);
+			Set<String> aliases = new HashSet<>(aliasesQuery.getResultList());
+			results.put(mapToDTO(port), aliases);
+		}
+		return results;
 	}
 }

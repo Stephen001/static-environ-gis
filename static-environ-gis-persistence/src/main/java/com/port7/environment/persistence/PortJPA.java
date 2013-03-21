@@ -24,6 +24,7 @@ import com.vividsolutions.jts.geom.Point;
  */
 @Entity
 @NamedQueries({
+		@NamedQuery(name = "all-ports", query = "SELECT p FROM PortJPA p"), 
 		@NamedQuery(name = "port-by-name", query = "SELECT p FROM PortJPA p WHERE UPPER(p.englishName) = :englishName"),
 		@NamedQuery(name = "port-search-by-name", query = "SELECT DISTINCT p FROM PortAliasJPA a RIGHT JOIN a.port p WHERE UPPER(p.englishName) LIKE :term OR UPPER(a.name) LIKE :term")
 })

@@ -9,6 +9,8 @@
 package com.port7.environment.api;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import javax.ejb.Remote;
 
@@ -84,4 +86,12 @@ public interface PortServiceRemote {
 	 * @return The list of aliases for this port.
 	 */
 	public List<String> getAliases(Port port);
+	
+	/**
+	 * Gets the full set of ports, with their associated aliases. Please note this is
+	 * potentially a very large data set and so may be very memory-intensive.
+	 * 
+	 * @return The full set of ports, with their aliases.
+	 */
+	public Map<Port, Set<String>> getPortsAndAliases();
 }

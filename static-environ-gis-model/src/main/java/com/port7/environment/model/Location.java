@@ -8,6 +8,8 @@
  */
 package com.port7.environment.model;
 
+import java.io.Serializable;
+
 import com.vividsolutions.jts.geom.Geometry;
 
 /**
@@ -15,6 +17,6 @@ import com.vividsolutions.jts.geom.Geometry;
  * 
  * @author Stephen Badger [stephen@port7.dk]
  */
-public interface Location {
+public interface Location extends Serializable {
 	public Geometry getGeometry();
 }

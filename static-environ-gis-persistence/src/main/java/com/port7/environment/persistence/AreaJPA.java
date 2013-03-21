@@ -27,6 +27,7 @@ import com.vividsolutions.jts.geom.Polygon;
  */
 @Entity
 @NamedQueries({
+		@NamedQuery(name = "all-areas", query = "SELECT a FROM AreaJPA a"),
 		@NamedQuery(name = "area-by-name", query = "SELECT c FROM AreaJPA c WHERE UPPER(c.englishName) = :englishName"),
 		@NamedQuery(name = "area-search-by-name", query = "SELECT DISTINCT p FROM AreaAliasJPA a RIGHT JOIN a.area p WHERE UPPER(p.englishName) LIKE :term OR UPPER(a.name) LIKE :term")
 })
