@@ -35,7 +35,7 @@ public class AreaJPA extends AbstractEntityJPA {
 	@Column(nullable = false, unique = true)
 	private String  englishName;
 	@Column(nullable = false)
-	@Type(type = "org.hibernatespatial.GeometryUserType")
+	@Type(type = "org.hibernate.spatial.GeometryType")
 	private Polygon landMassShape;
 	@ManyToOne(fetch = FetchType.EAGER)
 	@Index(name = "areatype")

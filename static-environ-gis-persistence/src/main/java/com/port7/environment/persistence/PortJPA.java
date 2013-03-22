@@ -32,7 +32,7 @@ public class PortJPA extends AbstractEntityJPA {
 	@Column(nullable = false, unique = true)
 	private String englishName;
 	@Column(nullable = false)
-	@Type(type = "org.hibernatespatial.GeometryUserType")
+	@Type(type = "org.hibernate.spatial.GeometryType")
 	private Point location;
 	
 	/**

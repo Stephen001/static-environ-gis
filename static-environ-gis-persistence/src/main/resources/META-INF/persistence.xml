@@ -4,7 +4,7 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
 	<persistence-unit name="static-environ-gis" transaction-type="JTA">
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
-		<jta-data-source>jdbc/static-environ-gis</jta-data-source>
+		<jta-data-source>java:jboss/datasources/static-environ-gis</jta-data-source>
 		
 		<class>com.port7.environment.persistence.AreaJPA</class>
 		<class>com.port7.environment.persistence.AreaAliasJPA</class>
@@ -20,9 +20,9 @@
 		
 		<properties>
 			<!-- Needed for OpenGIS -->
-			<property name="hibernate.dialect" value="org.hibernatespatial.mysql.MySQLSpatialDialect" />
+			<property name="hibernate.dialect" value="org.hibernate.spatial.dialect.postgis.PostgisDialect" />
 			<!-- Auto-updates the schema. Remove for a production system. -->
-			<property name="hibernate.hbm2ddl.auto" value="validate" />
+			<property name="hibernate.hbm2ddl.auto" value="create" />
 		</properties>
 	</persistence-unit>
 </persistence>
