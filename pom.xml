@@ -4,7 +4,7 @@
 
 	<groupId>com.port7.component</groupId>
 	<artifactId>static-environ-gis</artifactId>
-	<version>1.0.1-SNAPSHOT</version>
+	<version>1.4.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<name>Static Environment GIS</name>
@@ -12,7 +12,7 @@
 	<parent>
 		<groupId>com.port7</groupId>
 		<artifactId>base</artifactId>
-		<version>1.4.0</version>
+		<version>1.4.2</version>
 	</parent>
 
 	<modules>
@@ -29,6 +29,7 @@
 	            <groupId>com.port7.component</groupId>
 	            <artifactId>static-environ-gis-model</artifactId>
 	            <version>1.0.1-SNAPSHOT</version>
+	            <scope>provided</scope>
 	        </dependency>
 	        <dependency>
 	            <groupId>com.port7.component</groupId>
@@ -41,6 +42,7 @@
 	            <artifactId>static-environ-gis-persistence</artifactId>
 	            <version>1.0.1-SNAPSHOT</version>
 	            <type>ejb-client</type>
+	            <scope>provided</scope>
 	        </dependency>
 	        <dependency>
 	            <groupId>com.port7.component</groupId>
@@ -53,6 +55,7 @@
 	            <artifactId>static-environ-gis-api</artifactId>
 	            <version>1.0.1-SNAPSHOT</version>
 	            <type>ejb-client</type>
+	            <scope>provided</scope>
 	        </dependency>
 	         <dependency>
 	            <groupId>com.port7.component</groupId>

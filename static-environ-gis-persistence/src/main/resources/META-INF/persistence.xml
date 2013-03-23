@@ -22,7 +22,7 @@
 			<!-- Needed for OpenGIS -->
 			<property name="hibernate.dialect" value="org.hibernate.spatial.dialect.postgis.PostgisDialect" />
 			<!-- Auto-updates the schema. Remove for a production system. -->
-			<property name="hibernate.hbm2ddl.auto" value="create" />
+			<property name="hibernate.hbm2ddl.auto" value="validate" />
 		</properties>
 	</persistence-unit>
 </persistence>

@@ -16,9 +16,16 @@
 	<dependencies>
 	    <!-- Our Modules -->
 	    <dependency>
+            <groupId>com.port7.component</groupId>
+            <artifactId>static-environ-gis-model</artifactId>
+            <scope>provided</scope>
+       	</dependency>
+       	
+	    <dependency>
 	        <groupId>com.port7.component</groupId>
 	        <artifactId>static-environ-gis-persistence</artifactId>
 	        <type>ejb-client</type>
+	        <scope>provided</scope>
 	    </dependency>
 	    
        	<dependency>
