@@ -25,13 +25,13 @@
 		<auth-method>FORM</auth-method>
 		<realm-name>Static Environment GIS :: Administration</realm-name>
 		<form-login-config>
-			<form-login-page>/login.xhtml</form-login-page>
-			<form-error-page>/loginerror.xhtml</form-error-page>
+			<form-login-page>/login.jsp</form-login-page>
+			<form-error-page>/loginerror.jsp</form-error-page>
 		</form-login-config>
 	</login-config>
 	
 	<welcome-file-list>
-		<welcome-file>index.xhtml</welcome-file>
+		<welcome-file>index.html</welcome-file>
 	</welcome-file-list>
 	
 	<servlet>
