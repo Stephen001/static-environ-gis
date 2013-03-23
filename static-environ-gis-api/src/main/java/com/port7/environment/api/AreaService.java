@@ -15,11 +15,15 @@ import java.util.Set;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import javax.enterprise.event.Event;
+import javax.inject.Inject;
 
 import com.port7.environment.dao.AreaDAOLocal;
 import com.port7.environment.model.Area;
 import com.port7.environment.model.AreaMapperLocal;
 import com.port7.environment.model.PortMapperLocal;
+import com.port7.environment.model.event.AreaDataChangeEvent;
+import com.port7.environment.model.event.DataChangeType;
 import com.port7.environment.persistence.AreaJPA;
 import com.port7.environment.persistence.PortJPA;
 
@@ -36,6 +40,8 @@ public class AreaService implements AreaServiceRemote {
 	private PortMapperLocal portMapper;
 	@EJB
 	private AreaDAOLocal areaDAO;
+	@Inject
+	private Event<AreaDataChangeEvent> event;
 	
 	
 	/* (non-Javadoc)
@@ -71,7 +77,9 @@ public class AreaService implements AreaServiceRemote {
 	public void addAlias(String alias, Area area) {
 		AreaJPA areaJPA = areaMapper.getByName(area.getEnglishName());
 		if (areaJPA != null) {
-			areaDAO.addAlias(alias, areaJPA);
+			if (areaDAO.addAlias(alias, areaJPA)) {
+				event.fire(new AreaDataChangeEvent(alias, area, DataChangeType.ADD_ALIAS));
+			}
 		}
 	}
 
@@ -82,7 +90,9 @@ public class AreaService implements AreaServiceRemote {
 	public void removeAlias(String alias, Area area) {
 		AreaJPA areaJPA = areaMapper.getByName(area.getEnglishName());
 		if (areaJPA != null) {
-			areaDAO.removeAlias(alias, areaJPA);
+			if (areaDAO.removeAlias(alias, areaJPA)) {
+				event.fire(new AreaDataChangeEvent(alias, area, DataChangeType.REMOVE_ALIAS));
+			}
 		}
 	}
 
@@ -99,7 +109,10 @@ public class AreaService implements AreaServiceRemote {
 	 */
 	@Override
 	public void deleteArea(final Area area) {
-		areaDAO.delete(areaMapper.getByName(area.getEnglishName()));
+		for (String alias : areaDAO.delete(areaMapper.getByName(area.getEnglishName()))) {
+			event.fire(new AreaDataChangeEvent(alias, area, DataChangeType.REMOVE_ALIAS));
+		}
+		event.fire(new AreaDataChangeEvent(area.getEnglishName(), area, DataChangeType.REMOVE_ENTITY));
 	}
 
 	/* (non-Javadoc)
