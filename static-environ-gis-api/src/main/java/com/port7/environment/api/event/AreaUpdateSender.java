@@ -45,5 +45,6 @@ public class AreaUpdateSender {
 		MessageProducer producer = session.createProducer(topic);
 		ObjectMessage message = session.createObjectMessage(event);
 		producer.send(message);
+		session.commit();
 	}
 }

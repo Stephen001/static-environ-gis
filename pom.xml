@@ -4,7 +4,7 @@
 
 	<groupId>com.port7.component</groupId>
 	<artifactId>static-environ-gis</artifactId>
-	<version>1.4.1-SNAPSHOT</version>
+	<version>1.5.0</version>
 	<packaging>pom</packaging>
 
 	<name>Static Environment GIS</name>
@@ -28,39 +28,39 @@
 	        <dependency>
 	            <groupId>com.port7.component</groupId>
 	            <artifactId>static-environ-gis-model</artifactId>
-	            <version>1.4.1-SNAPSHOT</version>
+	            <version>1.5.0</version>
 	            <scope>provided</scope>
 	        </dependency>
 	        <dependency>
 	            <groupId>com.port7.component</groupId>
 	            <artifactId>static-environ-gis-persistence</artifactId>
-	            <version>1.4.1-SNAPSHOT</version>
+	            <version>1.5.0</version>
 	            <type>ejb</type>
 	        </dependency>
 	        <dependency>
 	            <groupId>com.port7.component</groupId>
 	            <artifactId>static-environ-gis-persistence</artifactId>
-	            <version>1.4.1-SNAPSHOT</version>
+	            <version>1.5.0</version>
 	            <type>ejb-client</type>
 	            <scope>provided</scope>
 	        </dependency>
 	        <dependency>
 	            <groupId>com.port7.component</groupId>
 	            <artifactId>static-environ-gis-api</artifactId>
-	            <version>1.4.1-SNAPSHOT</version>
+	            <version>1.5.0</version>
 	            <type>ejb</type>
 	        </dependency>
 	        <dependency>
 	            <groupId>com.port7.component</groupId>
 	            <artifactId>static-environ-gis-api</artifactId>
-	            <version>1.4.1-SNAPSHOT</version>
+	            <version>1.5.0</version>
 	            <type>ejb-client</type>
 	            <scope>provided</scope>
 	        </dependency>
 	         <dependency>
 	            <groupId>com.port7.component</groupId>
 	            <artifactId>static-environ-gis-admin</artifactId>
-	            <version>1.4.1-SNAPSHOT</version>
+	            <version>1.5.0</version>
 	            <type>war</type>
 	        </dependency>
 	    </dependencies>
