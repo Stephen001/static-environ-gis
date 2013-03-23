@@ -10,7 +10,7 @@
 	<parent>
 		<groupId>com.port7.component</groupId>
 		<artifactId>static-environ-gis</artifactId>
-		<version>1.0.1-SNAPSHOT</version>
+		<version>1.4.1-SNAPSHOT</version>
 	</parent>
 	
 	<dependencies>
@@ -18,15 +18,18 @@
 	    <dependency>
             <groupId>com.port7.component</groupId>
             <artifactId>static-environ-gis-model</artifactId>
-            <scope>provided</scope>
        	</dependency>
        	
 	    <dependency>
 	        <groupId>com.port7.component</groupId>
 	        <artifactId>static-environ-gis-persistence</artifactId>
 	        <type>ejb-client</type>
-	        <scope>provided</scope>
 	    </dependency>
+	    
+	    <dependency>
+			<groupId>com.vividsolutions</groupId>
+			<artifactId>jts</artifactId>
+		</dependency>
 	    
        	<dependency>
 			<groupId>javax</groupId>

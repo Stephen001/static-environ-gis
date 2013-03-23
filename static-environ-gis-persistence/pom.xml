@@ -10,7 +10,7 @@
 	<parent>
 		<groupId>com.port7.component</groupId>
 		<artifactId>static-environ-gis</artifactId>
-		<version>1.0.1-SNAPSHOT</version>
+		<version>1.4.1-SNAPSHOT</version>
 	</parent>
 	
 	<dependencies>
@@ -18,7 +18,6 @@
 	    <dependency>
 	        <groupId>com.port7.component</groupId>
 	        <artifactId>static-environ-gis-model</artifactId>
-	        <scope>provided</scope>
 	    </dependency>
 	    
 	    <dependency>
@@ -34,12 +33,10 @@
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-spatial</artifactId>
-			<scope>provided</scope>
 		</dependency>
        	<dependency>
 			<groupId>javax</groupId>
 			<artifactId>javaee-api</artifactId>
-			<scope>provided</scope>
 		</dependency>
 	</dependencies>
 	
