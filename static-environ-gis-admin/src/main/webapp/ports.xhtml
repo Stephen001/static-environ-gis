@@ -4,54 +4,9 @@
 	<h:head>
 		<title>Static Environment GIS :: Administration :: Ports</title>
 		<link rel="stylesheet" type="text/css" href="css/standard.css" />
-		<script type="text/javascript"
-		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBQVcskY0Eb6qqr6G32oVc-4knZQsJicj0&amp;sensor=false">
-		</script>
-		<script type="text/javascript">	
-			var map;
-			var marker;
-		
-			function placeMarker(location) {
-				 if (!marker) {
-					  marker = new google.maps.Marker({
-					      position: location,
-					      map: map
-					  });
-				  } else {
-					  marker.setPosition(location);
-				  }
-				  map.setCenter(location);
-				  var field = document.getElementById("portCreate:coordinate");
-				  field.value = "POINT (" + location.lat() + " " + location.lng() + ")";
-			}
-			
-			function initialize() {
-				var mapOptions = {
-					center : new google.maps.LatLng(55.761123, 13.084717),
-					zoom : 5,
-					mapTypeId : google.maps.MapTypeId.ROADMAP
-				};
-				map = new google.maps.Map(
-						document.getElementById("map"), mapOptions);
-				
-				google.maps.event.addListener(map, 'click', function(event) {
-					placeMarker(event.latLng);
-				});
-				
-				setMarker(document.getElementById("portCreate:coordinate"));
-			}
-			
-			google.maps.event.addDomListener(window, 'load', initialize);
-			
-			function setMarker(field) {
-				if (field.value) {
-					var regex = /POINT.+?([-0-9\.]+).+?([-0-9\.]+)/;
-					var matches = regex.exec(field.value);
-					placeMarker(new google.maps.LatLng(Number(matches[1]), Number(matches[2])));
-				}
-			}
-		</script>
+		<script type="text/javascript" src="js/ports.js" />
 	</h:head>
+	
 	<h:body>
 		<h1>Ports</h1>
 		<h2>Create / Edit</h2>
@@ -64,12 +19,21 @@
 					<h:inputText id="aliases" value="#{PortCrud.aliases}" />
 					<h:outputLabel value="Coordinate" for="coordinate" />
 					<h:inputText id="coordinate" value="#{PortCrud.coordinate}" onchange="setMarker(this);" />
-					<div id="map" />
 					<h:commandButton value="Create / Edit Port" action="#{PortCrud.persist}" />
 				</h:panelGroup>
 			</h:form>
 		</div>
-		<h2>Search</h2>
+		<h2>Search Google Maps</h2>
+		<div>
+			<h:form id="googleSearch">
+				<h:panelGroup columns="2">
+					<h:outputLabel value="Address:" for="address" />
+					<h:inputText id="address" value="#{GoogleSearch.address}" />
+					<h:commandButton value="Search Google" onclick="codeAddress('westlake')" />
+				</h:panelGroup>
+			</h:form>
+		</div>
+		<h2>Search Database</h2>
 		<div>
 			<h:form id="portSearch">
 				<h:panelGroup columns="2">
@@ -109,5 +73,6 @@
 				</h:panelGroup>
 			</h:form>
 		</div>
+		<div id="map" />
 	</h:body>
 </html>
