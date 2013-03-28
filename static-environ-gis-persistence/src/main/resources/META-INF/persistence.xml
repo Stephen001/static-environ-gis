@@ -19,6 +19,8 @@
 		<exclude-unlisted-classes>true</exclude-unlisted-classes>
 		
 		<properties>
+			<!--  See http://stackoverflow.com/questions/10075081/hibernate-slow-to-acquire-postgres-connection -->
+			<!-- <property name="hibernate.temp.use_jdbc_metadata_defaults" value="false" />  -->
 			<!-- Needed for OpenGIS -->
 			<property name="hibernate.dialect" value="org.hibernate.spatial.dialect.postgis.PostgisDialect" />
 			<!-- Auto-updates the schema. Remove for a production system. -->

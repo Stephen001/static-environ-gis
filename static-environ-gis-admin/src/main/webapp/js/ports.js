@@ -55,7 +55,7 @@ function codeAddress(address) {
 function loadScript() {
 	  var script = document.createElement("script");
 	  script.type = "text/javascript";
-	  script.src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyDW-fpm8XuSMsoOh4iByXEmQDVDTrJFkCY&sensor=false&callback=initialize";
+	  script.src = "https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyDW-fpm8XuSMsoOh4iByXEmQDVDTrJFkCY&sensor=false&callback=initialize";
 	  document.body.appendChild(script);
 }
 
