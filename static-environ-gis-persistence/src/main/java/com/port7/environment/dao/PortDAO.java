@@ -2,6 +2,7 @@ package com.port7.environment.dao;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import javax.ejb.Stateless;
 import javax.enterprise.event.Event;
@@ -38,7 +39,7 @@ public class PortDAO implements PortDAOLocal {
 	@Override
 	public boolean addAlias(String alias, PortJPA port) {
 		TypedQuery<PortAliasJPA> query = em.createNamedQuery("existing-alias-for-port", PortAliasJPA.class);
-		query.setParameter("name", alias);
+		query.setParameter("name", alias.toUpperCase(Locale.ENGLISH));
 		query.setParameter("port", port);
 		try {
 			query.getSingleResult();
@@ -58,7 +59,7 @@ public class PortDAO implements PortDAOLocal {
 	@Override
 	public boolean removeAlias(String alias, PortJPA port) {
 		TypedQuery<PortAliasJPA> query = em.createNamedQuery("existing-alias-for-port", PortAliasJPA.class);
-		query.setParameter("name", alias);
+		query.setParameter("name", alias.toUpperCase(Locale.ENGLISH));
 		query.setParameter("port", port);
 		try {
 			PortAliasJPA result = query.getSingleResult();
@@ -75,7 +76,7 @@ public class PortDAO implements PortDAOLocal {
 	@Override
 	public void updateMetadata(String oldName, Port port) {
 		TypedQuery<PortJPA> query = em.createNamedQuery("port-by-name", PortJPA.class);
-		query.setParameter("englishName", oldName);
+		query.setParameter("englishName", oldName.toUpperCase(Locale.ENGLISH));
 		PortJPA c;
 		boolean needsPersist = false;
 		try {

@@ -2,6 +2,7 @@ package com.port7.environment.dao;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import javax.ejb.Stateless;
 import javax.enterprise.event.Event;
@@ -32,7 +33,7 @@ public class AreaDAO implements AreaDAOLocal {
 	@Override
 	public boolean addAlias(String alias, AreaJPA area) {
 		TypedQuery<AreaAliasJPA> query = em.createNamedQuery("existing-alias-for-area", AreaAliasJPA.class);
-		query.setParameter("name", alias);
+		query.setParameter("name", alias.toUpperCase(Locale.ENGLISH));
 		query.setParameter("area", area);
 		try {
 			query.getSingleResult();
@@ -52,7 +53,7 @@ public class AreaDAO implements AreaDAOLocal {
 	@Override
 	public boolean removeAlias(String alias, AreaJPA area) {
 		TypedQuery<AreaAliasJPA> query = em.createNamedQuery("existing-alias-for-area", AreaAliasJPA.class);
-		query.setParameter("name", alias);
+		query.setParameter("name", alias.toUpperCase(Locale.ENGLISH));
 		query.setParameter("area", area);
 		try {
 			AreaAliasJPA result = query.getSingleResult();
@@ -69,7 +70,7 @@ public class AreaDAO implements AreaDAOLocal {
 	@Override
 	public void updateMetadata(String oldName, Area area) {
 		TypedQuery<AreaJPA> query = em.createNamedQuery("area-by-name", AreaJPA.class);
-		query.setParameter("englishName", oldName);
+		query.setParameter("englishName", oldName.toUpperCase(Locale.ENGLISH));
 		AreaJPA c;
 		boolean needsPersist = false;
 		try {
