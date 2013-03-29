@@ -15,10 +15,14 @@ import java.util.Set;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import javax.enterprise.event.Event;
+import javax.inject.Inject;
 
 import com.port7.environment.dao.PortDAOLocal;
 import com.port7.environment.model.Port;
 import com.port7.environment.model.PortMapperLocal;
+import com.port7.environment.model.event.DataChangeType;
+import com.port7.environment.model.event.PortDataChangeEvent;
 import com.port7.environment.persistence.PortJPA;
 
 /**
@@ -33,6 +37,9 @@ public class PortService implements PortServiceRemote {
 	
 	@EJB
 	private PortDAOLocal dao;
+	
+	@Inject
+	private Event<PortDataChangeEvent> event;
 	
 	/* (non-Javadoc)
 	 * @see com.port7.environment.api.PortServiceRemote#getByEnglishName(java.lang.String)
@@ -66,7 +73,9 @@ public class PortService implements PortServiceRemote {
 	public void addAlias(String alias, Port port) {
 		PortJPA portJPA = mapper.mapFromDTO(port);
 		if (portJPA != null) {
-			dao.addAlias(alias, portJPA);
+			if (dao.addAlias(alias, portJPA)) {
+				event.fire(new PortDataChangeEvent(alias, port, DataChangeType.ADD_ALIAS));
+			}
 		}
 	}
 
@@ -77,7 +86,9 @@ public class PortService implements PortServiceRemote {
 	public void removeAlias(String alias, Port port) {
 		PortJPA portJPA = mapper.mapFromDTO(port);
 		if (portJPA != null) {
-			dao.removeAlias(alias, portJPA);
+			if (dao.removeAlias(alias, portJPA)) {
+				event.fire(new PortDataChangeEvent(alias, port, DataChangeType.REMOVE_ALIAS));
+			}
 		}
 	}
 
@@ -94,7 +105,10 @@ public class PortService implements PortServiceRemote {
 	 */
 	@Override
 	public void deletePort(final Port port) {
-		dao.delete(mapper.mapFromDTO(port));
+		for (String alias : dao.delete(mapper.mapFromDTO(port))) {
+			event.fire(new PortDataChangeEvent(alias, port, DataChangeType.REMOVE_ENTITY));
+		}
+		event.fire(new PortDataChangeEvent(port.getEnglishName(), port, DataChangeType.REMOVE_ENTITY));
 	}
 
 	/* (non-Javadoc)

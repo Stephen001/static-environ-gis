@@ -4,12 +4,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.Stateless;
+import javax.enterprise.event.Event;
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
 import com.port7.environment.model.Port;
+import com.port7.environment.model.event.DataChangeType;
+import com.port7.environment.model.event.PortDataChangeEvent;
 import com.port7.environment.persistence.PortAliasJPA;
 import com.port7.environment.persistence.PortJPA;
 
@@ -17,6 +21,9 @@ import com.port7.environment.persistence.PortJPA;
 public class PortDAO implements PortDAOLocal {
 	@PersistenceContext
 	private EntityManager em;
+	
+	@Inject
+	Event<PortDataChangeEvent> event;
 	
 	@Override
 	public List<PortJPA> searchByNameOrAlias(String term) {
@@ -29,17 +36,19 @@ public class PortDAO implements PortDAOLocal {
 	 * @see com.port7.environment.dao.PortDAOLocal#addAlias(java.lang.String, com.port7.environment.persistence.PortJPA)
 	 */
 	@Override
-	public void addAlias(String alias, PortJPA port) {
+	public boolean addAlias(String alias, PortJPA port) {
 		TypedQuery<PortAliasJPA> query = em.createNamedQuery("existing-alias-for-port", PortAliasJPA.class);
 		query.setParameter("name", alias);
 		query.setParameter("port", port);
 		try {
 			query.getSingleResult();
+			return false;
 		} catch (NoResultException e) {
 			PortAliasJPA aliasJPA = new PortAliasJPA();
 			aliasJPA.setPort(port);
 			aliasJPA.setName(alias);
 			em.persist(aliasJPA);
+			return true;
 		}
 	}
 
@@ -47,14 +56,17 @@ public class PortDAO implements PortDAOLocal {
 	 * @see com.port7.environment.dao.PortDAOLocal#removeAlias(java.lang.String, com.port7.environment.persistence.PortJPA)
 	 */
 	@Override
-	public void removeAlias(String alias, PortJPA port) {
+	public boolean removeAlias(String alias, PortJPA port) {
 		TypedQuery<PortAliasJPA> query = em.createNamedQuery("existing-alias-for-port", PortAliasJPA.class);
 		query.setParameter("name", alias);
 		query.setParameter("port", port);
 		try {
 			PortAliasJPA result = query.getSingleResult();
 			em.remove(result);
-		} catch (NoResultException e) {}
+			return true;
+		} catch (NoResultException e) {
+			return false;
+		}
 	}
 	
 	/* (non-Javadoc)
@@ -76,19 +88,35 @@ public class PortDAO implements PortDAOLocal {
 		c.setEnglishName(port.getEnglishName());
 		if (needsPersist) {
 			em.persist(c);
+			event.fire(new PortDataChangeEvent(oldName, port, DataChangeType.ADD_ENTITY));
+		} else {
+			TypedQuery<PortAliasJPA> aliasQuery = em.createNamedQuery("aliases-from-port", PortAliasJPA.class);
+			aliasQuery.setParameter("port", c);
+			for (PortAliasJPA alias : aliasQuery.getResultList()) {
+				event.fire(new PortDataChangeEvent(alias.getName(), port, DataChangeType.UPDATE_ENTITY));
+			}
+			if (port.getEnglishName().equals(oldName)) {
+				event.fire(new PortDataChangeEvent(port.getEnglishName(), port, DataChangeType.UPDATE_ENTITY));
+			} else {
+				event.fire(new PortDataChangeEvent(port.getEnglishName(), port, DataChangeType.ADD_ENTITY));
+				event.fire(new PortDataChangeEvent(oldName, port, DataChangeType.REMOVE_ENTITY));
+			}
 		}
 	}
 
 	@Override
-	public void delete(PortJPA byName) {
+	public List<String> delete(PortJPA byName) {
+		List<String> removedAliases = new ArrayList<>();
 		TypedQuery<PortAliasJPA> query = em.createNamedQuery("aliases-from-port", PortAliasJPA.class);
 		query.setParameter("port", byName);
 		try {
 			for (PortAliasJPA alias : query.getResultList()) {
 				em.remove(alias);
+				removedAliases.add(alias.getName());
 			}
 		} catch (NoResultException e) {}
 		em.remove(byName);
+		return removedAliases;
 	}
 
 	@Override

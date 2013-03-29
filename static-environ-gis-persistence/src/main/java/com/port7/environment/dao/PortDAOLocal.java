@@ -11,13 +11,13 @@ import com.port7.environment.persistence.PortJPA;
 public interface PortDAOLocal {
 	public List<PortJPA> searchByNameOrAlias(final String term);
 	
-	public void addAlias(final String alias, final PortJPA port);
+	public boolean addAlias(final String alias, final PortJPA port);
 
-	public void removeAlias(final String alias, final PortJPA portJPA);
+	public boolean removeAlias(final String alias, final PortJPA portJPA);
 
 	public void updateMetadata(final String oldName, final Port port);
 
-	public void delete(final PortJPA byName);
+	public List<String> delete(final PortJPA byName);
 	
 	public List<String> getAliases(final PortJPA port);
 }
