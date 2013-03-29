@@ -4,7 +4,7 @@
 
 	<groupId>com.port7.component</groupId>
 	<artifactId>static-environ-gis</artifactId>
-	<version>1.6.3-SNAPSHOT</version>
+	<version>1.6.3</version>
 	<packaging>pom</packaging>
 
 	<name>Static Environment GIS</name>
@@ -28,39 +28,39 @@
 	        <dependency>
 	            <groupId>com.port7.component</groupId>
 	            <artifactId>static-environ-gis-model</artifactId>
-	            <version>1.6.3-SNAPSHOT</version>
+	            <version>1.6.3</version>
 	            <scope>provided</scope>
 	        </dependency>
 	        <dependency>
 	            <groupId>com.port7.component</groupId>
 	            <artifactId>static-environ-gis-persistence</artifactId>
-	            <version>1.6.3-SNAPSHOT</version>
+	            <version>1.6.3</version>
 	            <type>ejb</type>
 	        </dependency>
 	        <dependency>
 	            <groupId>com.port7.component</groupId>
 	            <artifactId>static-environ-gis-persistence</artifactId>
-	            <version>1.6.3-SNAPSHOT</version>
+	            <version>1.6.3</version>
 	            <type>ejb-client</type>
 	            <scope>provided</scope>
 	        </dependency>
 	        <dependency>
 	            <groupId>com.port7.component</groupId>
 	            <artifactId>static-environ-gis-api</artifactId>
-	            <version>1.6.3-SNAPSHOT</version>
+	            <version>1.6.3</version>
 	            <type>ejb</type>
 	        </dependency>
 	        <dependency>
 	            <groupId>com.port7.component</groupId>
 	            <artifactId>static-environ-gis-api</artifactId>
-	            <version>1.6.3-SNAPSHOT</version>
+	            <version>1.6.3</version>
 	            <type>ejb-client</type>
 	            <scope>provided</scope>
 	        </dependency>
 	         <dependency>
 	            <groupId>com.port7.component</groupId>
 	            <artifactId>static-environ-gis-admin</artifactId>
-	            <version>1.6.3-SNAPSHOT</version>
+	            <version>1.6.3</version>
 	            <type>war</type>
 	        </dependency>
 	    </dependencies>
@@ -70,6 +70,6 @@
 		<connection>scm:git:git://git.assembla.com:vessel-db.static-environ-gis.git</connection>
 		<developerConnection>scm:git:git@git.assembla.com:vessel-db.static-environ-gis.git</developerConnection>
 		<url>https://www.assembla.com/code/vessel-db/git-2/nodes</url>
-		<tag>HEAD</tag>
+		<tag>static-environ-gis-1.6.3</tag>
 	</scm>
 </project>
