@@ -31,6 +31,7 @@ import com.port7.environment.persistence.PortJPA;
  * @author Stephen Badger [stephen@port7.dk]
  */
 @Stateless
+@EJB(mappedName = "java:jboss/modules/static-environ-gis/PortService", beanInterface = PortServiceRemote.class)
 public class PortService implements PortServiceRemote {
 	@EJB
 	private PortMapperLocal mapper;

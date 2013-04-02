@@ -33,6 +33,7 @@ import com.port7.environment.persistence.PortJPA;
  * @author Stephen Badger [stephen@port7.dk]
  */
 @Stateless
+@EJB(mappedName = "java:jboss/modules/static-environ-gis/AreaService", beanInterface = AreaServiceRemote.class)
 public class AreaService implements AreaServiceRemote {
 	@EJB
 	private AreaMapperLocal areaMapper;
