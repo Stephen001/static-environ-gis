@@ -18,7 +18,7 @@ import javax.persistence.NamedQuery;
 import org.hibernate.annotations.Index;
 import org.hibernate.annotations.Type;
 
-import com.vividsolutions.jts.geom.Polygon;
+import com.vividsolutions.jts.geom.MultiPolygon;
 
 /**
  * A JPA implementation of an area. Queries will mostly use the englishName to identify data.
@@ -36,7 +36,7 @@ public class AreaJPA extends AbstractEntityJPA {
 	private String  englishName;
 	@Column(nullable = false)
 	@Type(type = "org.hibernate.spatial.GeometryType")
-	private Polygon landMassShape;
+	private MultiPolygon landMassShape;
 	@ManyToOne(fetch = FetchType.EAGER)
 	@Index(name = "areatype")
 	private AreaTypeJPA type;
@@ -55,7 +55,7 @@ public class AreaJPA extends AbstractEntityJPA {
 	 * 
 	 * @return The polygon representing this area's land mass.
 	 */
-	public Polygon getLandMassShape() {
+	public MultiPolygon getLandMassShape() {
 		return landMassShape;
 	}
 	
@@ -82,7 +82,7 @@ public class AreaJPA extends AbstractEntityJPA {
 	 * 
 	 * @param landMassShape The polygon representing this area's land mass.
 	 */
-	public void setLandMassShape(final Polygon landMassShape) {
+	public void setLandMassShape(final MultiPolygon landMassShape) {
 		this.landMassShape = landMassShape;
 	}
 

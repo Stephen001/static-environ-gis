@@ -15,7 +15,7 @@ import java.util.Set;
 import javax.ejb.Local;
 
 import com.port7.environment.persistence.AreaJPA;
-import com.vividsolutions.jts.geom.Polygon;
+import com.vividsolutions.jts.geom.MultiPolygon;
 
 /**
  * Maps between {@link AreaJPA} and {@link Area}.
@@ -64,5 +64,5 @@ public interface AreaMapperLocal {
 	 */
 	public Map<Area, Set<String>> getAreasAndAliases();
 
-	public Area newArea(String englishName, Polygon read, AreaType type);
+	public Area newArea(String englishName, MultiPolygon read, AreaType type);
 }

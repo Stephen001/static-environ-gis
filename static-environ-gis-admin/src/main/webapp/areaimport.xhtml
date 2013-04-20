@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html 	xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:f="http://java.sun.com/jsf/core"
+		xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:p="http://primefaces.org/ui">
+	<h:head>
+		<title>Static Environment GIS :: Administration :: Area Import</title>
+		<link rel="stylesheet" type="text/css" href="css/standard.css" />
+	</h:head>
+	<h:body>
+		<h:form enctype="multipart/form-data">  
+			<h:panelGrid columns="2" columnClasses="column">
+				<h:outputText value="Area Field Name" />
+				<p:inputText id="areaNameField" value="#{AreaImport.areaNameField}" />
+				<h:outputText value="Geometry Field Name" />
+				<p:inputText id="geometryField" value="#{AreaImport.geometryField}" />
+				<h:outputText value="Area Type" />
+				<h:selectOneMenu value="#{AreaImport.areaType}" converter="#{AreaTypeConverter}">
+	   				<f:selectItems value="#{AreaTypeList.listTypes()}" var="type" itemLabel="#{type}" itemValue="#{type}" />
+	   			</h:selectOneMenu>
+	    		<p:fileUpload fileUploadListener="#{AreaImport.handleFileUpload}"  
+	            	mode="advanced"   
+	            	update="messages"  
+	            	sizeLimit="10000000"   
+	            	allowTypes="/\.shp$/"/>  
+	    		<p:growl id="messages" showDetail="true"/>
+	    	</h:panelGrid>
+		</h:form> 
+	</h:body>
+</html>

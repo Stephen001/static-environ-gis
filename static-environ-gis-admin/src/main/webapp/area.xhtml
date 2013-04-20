@@ -102,13 +102,13 @@
 			
 			function updateField() {
 				  var field = document.getElementById("areaCreate:coordinates");
-				  var newValue = "POLYGON ((";
+				  var newValue = "MULTIPOLYGON (((";
 				  for (var i = 0; i &lt; area.getPath().getArray().length; i++) {
 					  newValue += area.getPath().getArray()[i].lat() + " " + area.getPath().getArray()[i].lng() + ", ";
 				  }
 				  newValue += area.getPath().getArray()[0].lat() + " " + area.getPath().getArray()[0].lng() + ", ";
 				  newValue = newValue.substring(0, newValue.length - 2);
-				  newValue += "))";
+				  newValue += ")))";
 				  field.value = newValue;
 			}
 		</script>

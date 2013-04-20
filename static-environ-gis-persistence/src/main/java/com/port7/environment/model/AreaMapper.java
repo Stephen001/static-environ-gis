@@ -22,7 +22,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
 import com.port7.environment.persistence.AreaJPA;
-import com.vividsolutions.jts.geom.Polygon;
+import com.vividsolutions.jts.geom.MultiPolygon;
 
 /**
  * Maps between {@link AreaJPA} JPA entities and {@link Area} DTOs.
@@ -74,7 +74,7 @@ public class AreaMapper implements AreaMapperLocal {
 	 * @see com.port7.environment.model.AreaMapperLocal#newArea(java.lang.String, com.vividsolutions.jts.geom.Polygon, com.port7.environment.model.AreaType)
 	 */
 	@Override
-	public Area newArea(String englishName, Polygon read, AreaType type) {
+	public Area newArea(String englishName, MultiPolygon read, AreaType type) {
 		return new AreaImpl(englishName, read, type);
 	}
 

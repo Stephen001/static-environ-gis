@@ -13,7 +13,7 @@ import com.port7.environment.api.AreaServiceRemote;
 import com.port7.environment.model.Area;
 import com.port7.environment.model.AreaMapperLocal;
 import com.port7.environment.model.AreaType;
-import com.vividsolutions.jts.geom.Polygon;
+import com.vividsolutions.jts.geom.MultiPolygon;
 import com.vividsolutions.jts.io.ParseException;
 import com.vividsolutions.jts.io.WKTReader;
 import com.vividsolutions.jts.io.WKTWriter;
@@ -66,7 +66,7 @@ public class AreaCrud {
 
 	public void persist() throws ParseException {
 		WKTReader reader = new WKTReader();
-		Area area = areaMapper.newArea(englishName, (Polygon) reader.read(coordinates), type);
+		Area area = areaMapper.newArea(englishName, (MultiPolygon) reader.read(coordinates), type);
 		service.updateAreaInfo(englishName, area);
 		List<String> oldAliases = service.getAliases(area);
 		List<String> newAliases = new ArrayList<>();
@@ -85,7 +85,7 @@ public class AreaCrud {
 		}
 	}
 	
-	public String getCoordinateString(Polygon polygon) {
+	public String getCoordinateString(MultiPolygon polygon) {
 		WKTWriter writer = new WKTWriter();
 		return writer.write(polygon);
 	}
