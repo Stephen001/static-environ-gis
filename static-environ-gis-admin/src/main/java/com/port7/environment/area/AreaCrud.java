@@ -13,6 +13,7 @@ import com.port7.environment.api.AreaServiceRemote;
 import com.port7.environment.model.Area;
 import com.port7.environment.model.AreaMapperLocal;
 import com.port7.environment.model.AreaType;
+import com.vividsolutions.jts.geom.Geometry;
 import com.vividsolutions.jts.geom.MultiPolygon;
 import com.vividsolutions.jts.io.ParseException;
 import com.vividsolutions.jts.io.WKTReader;
@@ -85,7 +86,7 @@ public class AreaCrud {
 		}
 	}
 	
-	public String getCoordinateString(MultiPolygon polygon) {
+	public String getCoordinateString(Geometry polygon) {
 		WKTWriter writer = new WKTWriter();
 		return writer.write(polygon);
 	}

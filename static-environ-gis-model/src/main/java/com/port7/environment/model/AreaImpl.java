@@ -8,7 +8,7 @@
  */
 package com.port7.environment.model;
 
-import com.vividsolutions.jts.geom.MultiPolygon;
+import com.vividsolutions.jts.geom.Geometry;
 
 /**
  * An immutable geographical representation of a area on the globe. Areas are very general, and typically do not encompass
@@ -18,7 +18,7 @@ import com.vividsolutions.jts.geom.MultiPolygon;
  */
 public final  class AreaImpl implements Area {
 	private static final long serialVersionUID = 3250883859948824868L;
-	private final MultiPolygon shape;
+	private final Geometry shape;
 	private final String englishName;
 	private final AreaType type;
 
@@ -29,7 +29,7 @@ public final  class AreaImpl implements Area {
 	 * @param location The shape of the area, in global coordinates.
 	 * @param type The type of area this is.
 	 */
-	public AreaImpl(final String englishName, final MultiPolygon shape, final AreaType type) {
+	public AreaImpl(final String englishName, final Geometry shape, final AreaType type) {
 		this.englishName 	= englishName;
 		this.shape 			= shape;
 		this.type 			= type;
@@ -39,7 +39,7 @@ public final  class AreaImpl implements Area {
 	 * @see com.port7.environment.model.Area#getGeometry()
 	 */
 	@Override
-	public final MultiPolygon getGeometry() {
+	public final Geometry getGeometry() {
 		return shape;
 	}
 

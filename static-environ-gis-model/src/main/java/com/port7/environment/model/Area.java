@@ -10,7 +10,7 @@ package com.port7.environment.model;
 
 import java.io.Serializable;
 
-import com.vividsolutions.jts.geom.MultiPolygon;
+import com.vividsolutions.jts.geom.Geometry;
 
 /**
  * A geographical representation of an area on the globe. Areas are very general, and typically do not encompass
@@ -31,7 +31,7 @@ public interface Area extends Location, Serializable {
 	 * 
 	 * @return The polygon representing this Area.
 	 */
-	public MultiPolygon getGeometry();
+	public Geometry getGeometry();
 	
 	/**
 	 * Gets the area type associated with this area.
