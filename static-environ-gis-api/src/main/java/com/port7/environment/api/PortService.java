@@ -11,6 +11,7 @@ package com.port7.environment.api;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 
 import javax.ejb.EJB;
@@ -125,5 +126,15 @@ public class PortService implements PortServiceRemote {
 	@Override
 	public Map<Port, Set<String>> getPortsAndAliases() {
 		return mapper.getPortsAndAliases();
+	}
+
+	/* (non-Javadoc)
+	 * @see com.port7.environment.api.PortServiceRemote#updatePortInfo(java.util.Map)
+	 */
+	@Override
+	public void updatePortInfo(Map<String, Port> ports) {
+		for (Entry<String, Port> entry : ports.entrySet()) {
+			updatePortInfo(entry.getKey(), entry.getValue());
+		}
 	}
 }

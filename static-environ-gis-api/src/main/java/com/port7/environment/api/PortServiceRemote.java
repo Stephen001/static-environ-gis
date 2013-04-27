@@ -73,6 +73,15 @@ public interface PortServiceRemote {
 	public void updatePortInfo(final String oldEnglishName, final Port port);
 	
 	/**
+	 * Updates port information. In order to map english name corrections, the old name
+	 * must be provided. If you are just updating other information, the existing name can
+	 * be provided.
+	 * 
+	 * @param ports A map of name -> port to update.
+	 */
+	public void updatePortInfo(final Map<String, Port> ports);
+	
+	/**
 	 * Deletes a port (and all aliases) from the system.
 	 * 
 	 * @param port The port to delete.

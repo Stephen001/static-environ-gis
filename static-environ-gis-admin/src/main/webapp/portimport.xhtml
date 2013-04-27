@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html 	xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:f="http://java.sun.com/jsf/core"
+		xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:p="http://primefaces.org/ui">
+	<h:head>
+		<title>Static Environment GIS :: Administration :: Port Import</title>
+		<link rel="stylesheet" type="text/css" href="css/standard.css" />
+	</h:head>
+	<h:body>
+		<h:form enctype="multipart/form-data">  
+			<h:panelGrid columns="2" columnClasses="column">
+				<h:outputText value="Port Field Name" />
+				<p:inputText id="portNameField" value="#{PortImport.portNameField}" />
+				<h:outputText value="Geometry Field Name" />
+				<p:inputText id="geometryField" value="#{PortImport.geometryField}" />
+	    		<p:fileUpload value="#{PortImport.file}" mode="simple" />  
+	            <p:commandButton value="Upload GIS Data" ajax="false" actionListener="#{PortImport.save}" id="withIcon" icon="ui-icon-disk" /> 
+	    	</h:panelGrid>
+		</h:form> 
+	</h:body>
+</html>
