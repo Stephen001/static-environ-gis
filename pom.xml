@@ -63,6 +63,36 @@
 	            <version>1.7.4-SNAPSHOT</version>
 	            <type>war</type>
 	        </dependency>
+	        <dependency>
+            	<groupId>org.primefaces</groupId>
+            	<artifactId>primefaces</artifactId>
+            	<version>3.5</version>
+        	</dependency>
+        	<dependency>
+            	<groupId>org.primefaces.themes</groupId>
+            	<artifactId>bootstrap</artifactId>
+            	<version>1.0.9</version>
+        	</dependency>
+        	<dependency>
+   				<groupId>commons-fileupload</groupId>
+   				<artifactId>commons-fileupload</artifactId>
+   				<version>1.2.1</version>
+			</dependency>
+			<dependency>
+   				<groupId>commons-io</groupId>
+   				<artifactId>commons-io</artifactId>
+   				<version>1.4</version>
+			</dependency>
+        	<dependency>
+            	<groupId>org.geotools</groupId>
+            	<artifactId>gt-shapefile</artifactId>
+            	<version>9.1</version>
+        	</dependency>
+        	<dependency>
+				<groupId>org.apache.commons</groupId>
+				<artifactId>commons-compress</artifactId>
+				<version>1.5</version>
+			</dependency>
 	    </dependencies>
 	</dependencyManagement>
 	
