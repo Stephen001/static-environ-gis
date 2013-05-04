@@ -27,6 +27,7 @@ import javax.persistence.NamedQuery;
 		@NamedQuery(name = "existing-alias-for-area", query = "SELECT p FROM AreaAliasJPA p WHERE UPPER(p.name) = :name AND p.area = :area"),
 		@NamedQuery(name = "aliases-from-area", query = "SELECT p FROM AreaAliasJPA p WHERE p.area = :area"), 
 		@NamedQuery(name = "all-area-aliases", query = "SELECT p.name FROM AreaAliasJPA p"),
+		@NamedQuery(name = "all-area-aliases-full", query = "SELECT p FROM AreaAliasJPA p"),
 		@NamedQuery(name = "area-aliases", query = "SELECT p.name FROM AreaAliasJPA p WHERE p.area = :area")
 })
 public class AreaAliasJPA extends AbstractEntityJPA {

@@ -14,6 +14,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 
 import javax.ejb.Stateless;
@@ -21,6 +22,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
+import com.port7.environment.persistence.AreaAliasJPA;
 import com.port7.environment.persistence.AreaJPA;
 import com.vividsolutions.jts.geom.MultiPolygon;
 
@@ -84,12 +86,19 @@ public class AreaMapper implements AreaMapperLocal {
 	@Override
 	public Map<Area, Set<String>> getAreasAndAliases() {
 		Map<Area, Set<String>> results = new HashMap<>();
+		Map<String, Area> areas = new HashMap<>();
+		Map<String, Set<String>> aliases = new HashMap<>();
 		TypedQuery<AreaJPA> areaQuery = manager.createNamedQuery("all-areas", AreaJPA.class);
-		TypedQuery<String> aliasesQuery = manager.createNamedQuery("area-aliases", String.class);
 		for (AreaJPA a : areaQuery.getResultList()) {
-			aliasesQuery.setParameter("area", a);
-			Set<String> aliases = new HashSet<>(aliasesQuery.getResultList());
-			results.put(mapToDTO(a), aliases);
+			areas.put(a.getEnglishName(), mapToDTO(a));
+			aliases.put(a.getEnglishName(), new HashSet<String>());
+		}
+		TypedQuery<AreaAliasJPA> aliasQuery = manager.createNamedQuery("all-area-aliases-full", AreaAliasJPA.class);
+		for (AreaAliasJPA a : aliasQuery.getResultList()) {
+			aliases.get(a.getArea().getEnglishName()).add(a.getName());
+		}
+		for (Entry<String, Area> a : areas.entrySet()) {
+			results.put(a.getValue(), aliases.get(a.getKey()));
 		}
 		return results;
 	}
