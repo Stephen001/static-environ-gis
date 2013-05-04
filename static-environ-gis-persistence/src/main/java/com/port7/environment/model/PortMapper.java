@@ -14,6 +14,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 
 import javax.ejb.Stateless;
@@ -21,6 +22,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
+import com.port7.environment.persistence.PortAliasJPA;
 import com.port7.environment.persistence.PortJPA;
 import com.vividsolutions.jts.geom.Point;
 
@@ -84,13 +86,20 @@ public class PortMapper implements PortMapperLocal {
 	 */
 	@Override
 	public Map<Port, Set<String>> getPortsAndAliases() {
-		Map<Port, Set<String>> results = new HashMap<Port, Set<String>>();
-		TypedQuery<PortJPA> query = manager.createNamedQuery("all-ports", PortJPA.class);
-		TypedQuery<String> aliasesQuery = manager.createNamedQuery("port-aliases", String.class);
-		for (PortJPA port : query.getResultList()) {
-			aliasesQuery.setParameter("port", port);
-			Set<String> aliases = new HashSet<>(aliasesQuery.getResultList());
-			results.put(mapToDTO(port), aliases);
+		Map<Port, Set<String>> results = new HashMap<>();
+		Map<String, Port> ports = new HashMap<>();
+		Map<String, Set<String>> aliases = new HashMap<>();
+		TypedQuery<PortJPA> portQuery = manager.createNamedQuery("all-ports", PortJPA.class);
+		for (PortJPA a : portQuery.getResultList()) {
+			ports.put(a.getEnglishName(), mapToDTO(a));
+			aliases.put(a.getEnglishName(), new HashSet<String>());
+		}
+		TypedQuery<PortAliasJPA> aliasQuery = manager.createNamedQuery("all-port-aliases-full", PortAliasJPA.class);
+		for (PortAliasJPA a : aliasQuery.getResultList()) {
+			aliases.get(a.getPort().getEnglishName()).add(a.getName());
+		}
+		for (Entry<String, Port> a : ports.entrySet()) {
+			results.put(a.getValue(), aliases.get(a.getKey()));
 		}
 		return results;
 	}
