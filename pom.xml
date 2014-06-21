@@ -10,9 +10,9 @@
 	<name>Static Environment GIS</name>
 
 	<parent>
-		<groupId>com.port7</groupId>
+		<groupId>com.awesomeware</groupId>
 		<artifactId>base</artifactId>
-		<version>1.7.1</version>
+		<version>1.1.1</version>
 	</parent>
 
 	<modules>
@@ -97,9 +97,9 @@
 	</dependencyManagement>
 	
 	<scm>
-		<connection>scm:git:git://git.assembla.com:vessel-db.static-environ-gis.git</connection>
-		<developerConnection>scm:git:git@git.assembla.com:vessel-db.static-environ-gis.git</developerConnection>
-		<url>https://www.assembla.com/code/vessel-db/git-2/nodes</url>
+		<connection>scm:git:git://github.com/Stephen001/static-environ-gis.git</connection>
+		<developerConnection>scm:git:git@github.com:Stephen001/static-environ-gis.git</developerConnection>
+		<url>https://github.com/Stephen001/static-environ-gis</url>
 		<tag>HEAD</tag>
 	</scm>
 </project>
