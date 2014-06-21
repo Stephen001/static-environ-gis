@@ -8,7 +8,7 @@
 	<name>Static Environment GIS :: EAR</name>
 
 	<parent>
-		<groupId>com.port7.component</groupId>
+		<groupId>com.awesomeware.shipping.component</groupId>
 		<artifactId>static-environ-gis</artifactId>
 		<version>1.8.2-SNAPSHOT</version>
 	</parent>
@@ -16,22 +16,22 @@
 	<dependencies>
 		<!-- Our Modules -->
 		<dependency>
-			<groupId>com.port7.component</groupId>
+			<groupId>com.awesomeware.shipping.component</groupId>
 			<artifactId>static-environ-gis-persistence</artifactId>
 			<type>ejb</type>
 		</dependency>
 		<dependency>
-			<groupId>com.port7.component</groupId>
+			<groupId>com.awesomeware.shipping.component</groupId>
 			<artifactId>static-environ-gis-api</artifactId>
 			<type>ejb</type>
 		</dependency>
 		<dependency>
-	        <groupId>com.port7.component</groupId>
+	        <groupId>com.awesomeware.shipping.component</groupId>
 	        <artifactId>static-environ-gis-admin</artifactId>
 	        <type>war</type>
 	    </dependency>
 	    <dependency>
-	    	<groupId>com.port7.component</groupId>
+	    	<groupId>com.awesomeware.shipping.component</groupId>
 	    	<artifactId>static-environ-gis-model</artifactId>
 	    </dependency>
 	</dependencies>
@@ -45,20 +45,20 @@
 					<applicationName>static-environ-gis</applicationName>
 					<modules>
 						<ejbModule>
-							<groupId>com.port7.component</groupId>
+							<groupId>com.awesomeware.shipping.component</groupId>
 							<artifactId>static-environ-gis-persistence</artifactId>
 						</ejbModule>
 						<ejbModule>
-							<groupId>com.port7.component</groupId>
+							<groupId>com.awesomeware.shipping.component</groupId>
 							<artifactId>static-environ-gis-api</artifactId>
 						</ejbModule>
 						<webModule>
-							<groupId>com.port7.component</groupId>
+							<groupId>com.awesomeware.shipping.component</groupId>
 							<artifactId>static-environ-gis-admin</artifactId>
 							<contextRoot>/static-environ-gis/admin</contextRoot>
 						</webModule>
 						<jarModule>
-							<groupId>com.port7.component</groupId>
+							<groupId>com.awesomeware.shipping.component</groupId>
 	    					<artifactId>static-environ-gis-model</artifactId>
 						</jarModule>
 					</modules>

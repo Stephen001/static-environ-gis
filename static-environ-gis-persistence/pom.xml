@@ -8,7 +8,7 @@
 	<name>Static Environment GIS :: Persistence</name>
 
 	<parent>
-		<groupId>com.port7.component</groupId>
+		<groupId>com.awesomeware.shipping.component</groupId>
 		<artifactId>static-environ-gis</artifactId>
 		<version>1.8.2-SNAPSHOT</version>
 	</parent>
@@ -16,7 +16,7 @@
 	<dependencies>
 	    <!-- Our Modules -->
 	    <dependency>
-	        <groupId>com.port7.component</groupId>
+	        <groupId>com.awesomeware.shipping.component</groupId>
 	        <artifactId>static-environ-gis-model</artifactId>
 	    </dependency>
 	    
@@ -71,7 +71,7 @@
 				<artifactId>maven-ejb-plugin</artifactId>
 				<configuration>
 					<clientIncludes combine.children="append">
-						<clientInclude>com/port7/environment/persistence/*JPA.class</clientInclude>
+						<clientInclude>com/awesomeware/shipping/environment/persistence/*JPA.class</clientInclude>
 					</clientIncludes>
 				</configuration>
 			</plugin>

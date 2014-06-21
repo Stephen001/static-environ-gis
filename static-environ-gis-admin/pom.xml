@@ -8,23 +8,23 @@
 	<name>Static Environment GIS :: Admin UI</name>
 
 	<parent>
-		<groupId>com.port7.component</groupId>
+		<groupId>com.awesomeware.shipping.component</groupId>
 		<artifactId>static-environ-gis</artifactId>
 		<version>1.8.2-SNAPSHOT</version>
 	</parent>
 	
 	<dependencies>
 	    <dependency>
-            <groupId>com.port7.component</groupId>
+            <groupId>com.awesomeware.shipping.component</groupId>
             <artifactId>static-environ-gis-model</artifactId>
        	</dependency>
        	<dependency>
-            <groupId>com.port7.component</groupId>
+            <groupId>com.awesomeware.shipping.component</groupId>
             <artifactId>static-environ-gis-api</artifactId>
             <type>ejb-client</type>
        	</dependency>
        	<dependency>
-	        <groupId>com.port7.component</groupId>
+	        <groupId>com.awesomeware.shipping.component</groupId>
 	        <artifactId>static-environ-gis-persistence</artifactId>
 	        <type>ejb-client</type>
 	    </dependency>
