@@ -4,7 +4,7 @@
 
 	<groupId>com.awesomeware.shipping.component</groupId>
 	<artifactId>static-environ-gis</artifactId>
-	<version>1.8.2-SNAPSHOT</version>
+	<version>1.9.0</version>
 	<packaging>pom</packaging>
 
 	<name>Static Environment GIS</name>
@@ -32,39 +32,39 @@
 	        <dependency>
 	            <groupId>com.awesomeware.shipping.component</groupId>
 	            <artifactId>static-environ-gis-model</artifactId>
-	            <version>1.8.2-SNAPSHOT</version>
+	            <version>1.9.0</version>
 	            <scope>provided</scope>
 	        </dependency>
 	        <dependency>
 	            <groupId>com.awesomeware.shipping.component</groupId>
 	            <artifactId>static-environ-gis-persistence</artifactId>
-	            <version>1.8.2-SNAPSHOT</version>
+	            <version>1.9.0</version>
 	            <type>ejb</type>
 	        </dependency>
 	        <dependency>
 	            <groupId>com.awesomeware.shipping.component</groupId>
 	            <artifactId>static-environ-gis-persistence</artifactId>
-	            <version>1.8.2-SNAPSHOT</version>
+	            <version>1.9.0</version>
 	            <type>ejb-client</type>
 	            <scope>provided</scope>
 	        </dependency>
 	        <dependency>
 	            <groupId>com.awesomeware.shipping.component</groupId>
 	            <artifactId>static-environ-gis-api</artifactId>
-	            <version>1.8.2-SNAPSHOT</version>
+	            <version>1.9.0</version>
 	            <type>ejb</type>
 	        </dependency>
 	        <dependency>
 	            <groupId>com.awesomeware.shipping.component</groupId>
 	            <artifactId>static-environ-gis-api</artifactId>
-	            <version>1.8.2-SNAPSHOT</version>
+	            <version>1.9.0</version>
 	            <type>ejb-client</type>
 	            <scope>provided</scope>
 	        </dependency>
 	         <dependency>
 	            <groupId>com.awesomeware.shipping.component</groupId>
 	            <artifactId>static-environ-gis-admin</artifactId>
-	            <version>1.8.2-SNAPSHOT</version>
+	            <version>1.9.0</version>
 	            <type>war</type>
 	        </dependency>
 	        <dependency>
@@ -190,6 +190,6 @@
 		<connection>scm:git:git://github.com/Stephen001/static-environ-gis.git</connection>
 		<developerConnection>scm:git:git@github.com:Stephen001/static-environ-gis.git</developerConnection>
 		<url>https://github.com/Stephen001/static-environ-gis</url>
-		<tag>HEAD</tag>
+		<tag>static-environ-gis-1.9.0</tag>
 	</scm>
 </project>
